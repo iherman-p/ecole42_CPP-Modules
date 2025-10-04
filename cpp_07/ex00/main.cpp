@@ -1,33 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   generate.cpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/23 23:16:06 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/28 17:17:28 by iherman-         ###   ########.fr       */
+/*   Created: 2025/09/28 17:28:49 by iherman-          #+#    #+#             */
+/*   Updated: 2025/09/28 17:28:50 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "A.hpp"
-#include "B.hpp"
-#include "C.hpp"
-
-Base*	generate()
-{
-	static bool	srand_called = false;
-	if (srand_called == false)
-	{
-		std::srand(static_cast<unsigned int>(std::time(0)));
-		srand_called = true;	
-	}
-
-	int	num = std::rand() % 300;
-
-	if (num < 100)
-		return new A;
-	else if (num < 200)
-		return new B;
-	return new C;
-}

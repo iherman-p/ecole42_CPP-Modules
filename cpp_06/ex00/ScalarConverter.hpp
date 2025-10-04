@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:41:41 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/23 23:08:33 by iherman-         ###   ########.fr       */
+/*   Updated: 2025/09/28 16:27:56 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 class ScalarConverter
 {
 	private:
-		void	abstract() = 0;
+		void	ScalarConverter() = 0;
 	public:
 		static void convert() const;
 };

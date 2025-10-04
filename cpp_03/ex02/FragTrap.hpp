@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:14:32 by iherman-          #+#    #+#             */
-/*   Updated: 2025/08/13 14:55:19 by iherman-         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:12:09 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 class FragTrap : public ClapTrap
 {
-	private:
 	public:
 		FragTrap(std::string name);
 		FragTrap(const FragTrap &to_cpy);

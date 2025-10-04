@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:41:36 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/23 22:40:58 by iherman-         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:11:30 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,27 +99,21 @@ void ScalarConverter::convert(const std::string& data) const
 		convertInt(std::stoi(data));
 		return ;
 	}
-	catch (std::exception& e)
-	{
-	}
+	catch (std::exception& e) {}
 
 	try // try for float
 	{
 		convertFloat(std::stof(data));
 		return ;
 	}
-	catch (std::exception& e)
-	{
-	}
+	catch (std::exception& e) {}
 
 	try // try for double
 	{
 		convertDouble(std::stod(data));
 		return ;
 	}
-	catch (std::exception& e)
-	{
-	}
+	catch (std::exception& e) {}
 
 	if (data.size() == 1) // try for char
 	{
