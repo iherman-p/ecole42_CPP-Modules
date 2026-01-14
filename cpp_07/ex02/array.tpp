@@ -1,19 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.cpp                                           :+:      :+:    :+:   */
+/*   array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/28 17:50:58 by iherman-          #+#    #+#             */
-/*   Updated: 2025/10/02 17:05:55 by iherman-         ###   ########.fr       */
+/*   Created: 2026/01/14 18:35:17 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/14 18:55:30 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-template <typpename T> iter(T arr[], const int arrLen, void(*fct)(T&))
+#include "array.hpp"
+
+Array::Array()
 {
-	for (int i = 0, i < arrLen, i++;)
-	{
-		fct(arr[i]);
-	}
+	_array = NULL;
+}
+
+Array::
+
+Array::
+
+Array::~Array()
+{
+	delete[] _array;
+}
+
+Array::
+
+Array::
+
+Array::OutOfBoundAccess::what()
+{
+	
 }

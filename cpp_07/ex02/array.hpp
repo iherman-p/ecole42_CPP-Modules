@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/28 17:51:05 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/14 18:33:59 by iherman-         ###   ########.fr       */
+/*   Created: 2026/01/14 18:32:26 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/14 18:52:12 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-# define ITER_HPP
+#ifndef ARRAY_HPP
+# define ARRAY_HPP
 
 #include <cstddef>
 
-template <typename T> void	iter(T arr[], const int arrLen, void(*fct)(T&))
+template <typename T> class Array
 {
-	if (fct == NULL)
-		return ;
-	for (int i = 0; i < arrLen; i++)
-	{
-		fct(arr[i]);
-	}
-}
+	private:
+		T		*_array;
+		size_t	_size;
+	public:
+		Array();
+		Array(unsigned int n);
+		Array(T& other);
+		~Array();
 
-template <typename T> void	increment_element(T& element)
-{
-	element++;
-}
+		int&	operator[] (int i);
 
-#endif // ITER_HPP
+		int		size(void);
+
+		class OutOfBoundAccess : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
+};
+
+#include "array.tpp"
+
+#endif // ARRAY_HPP

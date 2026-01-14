@@ -1,17 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   print_arr.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/28 17:29:24 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/14 18:46:09 by iherman-         ###   ########.fr       */
+/*   Created: 2026/01/14 18:14:42 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/14 18:33:52 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//probably need seperate headers
+#ifndef PRINT_ARR_HPP
+# define PRINT_ARRAY_HPP
 
-void	swap(int& n1, int& n2);
-int		min(const int n1, const int n2);
-int		max(const int n1, const int n2);
+#include <iostream>
+
+template <typename T> void	print_arr(const T arr[], int arr_size)
+{
+	for (int i = 0; i < arr_size; i++)
+		std::cout << arr[i] << " ";
+}
+
+#endif // PRINT_ARRAY_HPP
