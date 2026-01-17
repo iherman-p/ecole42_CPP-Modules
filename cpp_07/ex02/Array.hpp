@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array.hpp                                          :+:      :+:    :+:   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 18:32:26 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/15 16:00:28 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/17 19:28:00 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 #include <exception>
 #include <cstddef>
+#include <ostream>
 
 template <typename T>
 class Array
 {
 	private:
-		T		*_array;
-		size_t	_size;
+		T		*array_;
+		size_t	size_;
 	public:
 		Array();
 		Array(size_t n);
@@ -32,15 +33,15 @@ class Array
 		T&			operator[] (size_t i);
 		const T&	operator[] (size_t i) const;
 
-		size_t		size(void) const;
+		size_t		size() const;
 
-		class OutOfBoundAccess : public std::exception
+		class OutOfBoundsAccess : public std::exception
 		{
 			public:
 				virtual const char* what() const throw();
 		};
 };
 
-#include "array.tpp"
+#include "Array.tpp"
 
 #endif // ARRAY_HPP

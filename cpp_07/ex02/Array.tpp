@@ -1,43 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array.tpp                                          :+:      :+:    :+:   */
+/*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 18:35:17 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/15 16:11:50 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/17 19:23:58 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array.hpp"
+#include "Array.hpp"
 
 template <typename T>
 Array<T>::Array()
-	: _array(NULL), _size(0)
+	: array_(NULL), size_(0)
 {
 }
 
 template <typename T>
 Array<T>::Array(size_t n)
-	: _size(n)
+	: size_(n)
 {
-	_array = new T[n];
+	array_ = new T[n];
+	for (size_t i = 0; i < size_; i++)
+		array_[i] = 0;
 }
 
 template <typename T>
 Array<T>::Array(const Array<T>& other)
-	: _size(other.size)
+	: size_(other.size_)
 {
-	_array = new T[other._size];
-	for (size_t i = 0; i < _size; i++)
-		_array[i] = other._array[i];
+	array_ = new T[other.size_];
+	for (size_t i = 0; i < size_; i++)
+		array_[i] = other.array_[i];
 }
 
 template <typename T>
 Array<T>::~Array()
 {
-	delete[] _array;
+	delete[] array_;
 }
 
 template <typename T>
@@ -45,38 +47,39 @@ Array<T>&		Array<T>::operator=(const Array<T>& other)
 {
 	if (this != &other)
 	{
-		delete[] _array;
-		_array = new T[other._size]
-		_size = other._size;
-		for (size_t i = 0; i < _size; i++)
-			_array[i] = other._array[i];
+		delete[] array_;
+		array_ = new T[other.size_];
+		size_ = other.size_;
+		for (size_t i = 0; i < size_; i++)
+			array_[i] = other.array_[i];
 	}
+	return *this;
 }
 
 template <typename T>
 T&			Array<T>::operator[] (size_t i)
 {
-	if (i <= _size)
-	{
-		return _array[i];
-	}
-	throw Array<T>::OutOfBoundAccess();
+	if (i >= size_)
+		throw Array<T>::OutOfBoundsAccess();
+	return array_[i];
 }
 
 template <typename T>
 const T&	Array<T>::operator[] (size_t i) const
 {
-
+	if (i >= size_)
+		throw Array<T>::OutOfBoundsAccess();
+	return array_[i];
 }
 
 template <typename T>
-size_t		Array<T>::size(void) const
+size_t		Array<T>::size() const
 {
-	return _size;
+	return size_;
 }
 
 template <typename T>
-const char* Array<T>::OutOfBoundAccess::what() const throw()
+const char* Array<T>::OutOfBoundsAccess::what() const throw()
 {
-	return "Exception: Out of bounds array access".c_str();
+	return "Out of bounds array access";
 }

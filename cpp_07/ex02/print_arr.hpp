@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   print_arr.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/28 17:29:24 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/17 19:37:07 by iherman-         ###   ########.fr       */
+/*   Created: 2026/01/14 18:14:42 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/17 19:22:56 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-template <typename T>
-void	swap(T& n1, T& n2)
-{
-	T tmp = n1;
-	
-	n1 = n2;
-	n2 = tmp;
-}
+#ifndef PRINT_ARR_HPP
+# define PRINT_ARR_HPP
+
+#include <iostream>
+#include "Array.hpp"
 
 template <typename T>
-T	min(const T n1, const T n2)
+void	print_arr(const Array<T> arr, int arr_size)
 {
-	if (n1 < n2)
-		return n1;
-	return n2;
+	for (int i = 0; i < arr_size; i++)
+		std::cout << arr[i];
 }
 
-template <typename T>
-T	max(const T n1, const T n2)
-{
-	if (n1 > n2)
-		return n1;
-	return n2;
-}
+#endif // PRINT_ARR_HPP

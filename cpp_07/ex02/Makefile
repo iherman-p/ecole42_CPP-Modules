@@ -2,13 +2,15 @@ NAME = test
 
 SRC = main.cpp
 
+HEADERS = Array.hpp Array.tpp print_arr.hpp
+
 OBJ = $(SRC:.cpp=.o)
 
 FLAGS= -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEADERS)
 	@c++ $(FLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.cpp
