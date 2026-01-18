@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 23:19:27 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/16 20:16:12 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:49:43 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class AForm
 		bool			getSigned() const;
 
 		void			beSigned(const Bureaucrat& b);
-		void			execute(const Bureaucrat& ex) const = 0;
+		virtual void	execute(const Bureaucrat& ex) const = 0;
 
 		class GradeTooLowException : public std::exception
 		{
@@ -55,7 +55,7 @@ class AForm
 			public:
 				virtual const char *what() const throw();
 		};
-}
+};
 
 std::ostream&	operator<<(std::ostream& out, const AForm& obj);
 

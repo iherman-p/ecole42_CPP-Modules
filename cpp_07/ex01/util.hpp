@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.cpp                                       :+:      :+:    :+:   */
+/*   util.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/28 17:29:04 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/28 17:43:50 by iherman-         ###   ########.fr       */
+/*   Created: 2026/01/14 18:14:42 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/18 17:38:36 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "whatever.hpp"
+#ifndef UTIL_HPP
+# define UTIL_HPP
 
-void	swap(int& n1, int& n2)
+#include <iostream>
+
+template <typename T>
+void	print_arr(const T arr[], int arr_size)
 {
-	int tmp = n1;
-	
-	n1 = n2;
-	n1 = tmp;
+	for (int i = 0; i < arr_size; i++)
+		std::cout << arr[i] << " ";
 }
 
-int	min(const int n1, const int n2)
+template <typename T>
+void	increment_element(T& element)
 {
-	if (n1 < n2)
-		return n1;
-	return n2;
+	element++;
 }
 
-int	max(const int n1, const int n2)
-{
-	if (n1 > n2)
-		return n1;
-	return n2;
-}
+#endif // UTIL_HPP

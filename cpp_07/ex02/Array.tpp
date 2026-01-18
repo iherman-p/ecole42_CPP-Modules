@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 18:35:17 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/17 19:23:58 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:28:12 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,14 @@ Array<T>::Array()
 
 template <typename T>
 Array<T>::Array(size_t n)
-	: size_(n)
+	: array_(new T[n]()), size_(n)
 {
-	array_ = new T[n];
-	for (size_t i = 0; i < size_; i++)
-		array_[i] = 0;
 }
 
 template <typename T>
 Array<T>::Array(const Array<T>& other)
-	: size_(other.size_)
+	: array_(new T[other.size_]), size_(other.size_)
 {
-	array_ = new T[other.size_];
 	for (size_t i = 0; i < size_; i++)
 		array_[i] = other.array_[i];
 }
@@ -47,11 +43,13 @@ Array<T>&		Array<T>::operator=(const Array<T>& other)
 {
 	if (this != &other)
 	{
+		T* new_array = new T[other.size_];
+		for (size_t i = 0; i < other.size_; i++)
+			new_array[i] = other.array_[i];
+
 		delete[] array_;
-		array_ = new T[other.size_];
+		array_ = new_array;
 		size_ = other.size_;
-		for (size_t i = 0; i < size_; i++)
-			array_[i] = other.array_[i];
 	}
 	return *this;
 }

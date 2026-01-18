@@ -6,24 +6,24 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 22:53:21 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/13 12:25:30 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:51:43 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
 Form::Form()
-	: _name("Default_Form"), _isSigned(false), signReq(GRADE_MAX), execReq(GRADE_MAX)
+	: _name("Default_Form"), _isSigned(false), _signReq(GRADE_MAX), _execReq(GRADE_MAX)
 {	
 }
 
-Form::Form(const std::string name, const int signReq, execReq);
+Form::Form(const std::string name, const int signReq, const int execReq)
 	: _name(name), _isSigned(false), _signReq(signReq), _execReq(execReq)
 {
 }
 
-Form::Form(const Form& other);
-	: _name(other.name), _isSigned(other._isSigned), _signReq(other._signReq), _execReq(other._execReq)
+Form::Form(const Form& other)
+	: _name(other._name), _isSigned(other._isSigned), _signReq(other._signReq), _execReq(other._execReq)
 {
 }
 
@@ -67,7 +67,7 @@ void			Form::beSigned(const Bureaucrat& b)
 	if (b.getGrade() >= _signReq)
 		_isSigned = true;
 	else
-		throw GradeTooLowException;
+		throw GradeTooLowException();
 }
 
 virtual const char* Form::GradeTooHighException::what() const throw()

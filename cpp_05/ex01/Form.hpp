@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 23:19:27 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/10 13:25:23 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:48:32 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ class Form
 			public:
 				virtual const char *what() const throw();
 		};
-}
+};
 
 std::ostream&	operator<<(std::ostream& out, const Form& obj);
 

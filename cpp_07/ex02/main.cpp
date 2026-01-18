@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 18:33:27 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/17 19:33:24 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:35:06 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int	main()
 {
 	const size_t	array_size = 10;
 	Array<int> i_array(array_size);
+
+	std::cout << "Array 1 before init: ";
+	print_arr(i_array, array_size);
+	std::cout << std::endl;
 	
 	for (size_t i = 0; i < array_size; i++)
 		i_array[i] = i;

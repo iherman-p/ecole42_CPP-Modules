@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 17:51:05 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/17 18:45:00 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:38:44 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ void	iter(T arr[], const int arrLen, void(*fct)(T&))
 	{
 		fct(arr[i]);
 	}
-}
-
-template <typename T>
-void	increment_element(T& element)
-{
-	element++;
 }
 
 #endif // ITER_HPP

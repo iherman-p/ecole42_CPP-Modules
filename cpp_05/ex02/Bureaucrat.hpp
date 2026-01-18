@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 22:29:07 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/16 15:19:06 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:48:40 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ class Bureaucrat
 			public:
 				virtual const char* what() const throw();
 		};
-}
+};
 
 std::ostream&	operator<<(std::ostream& out, const Bureaucrat& obj);
 

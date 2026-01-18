@@ -6,11 +6,11 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 23:39:36 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/16 15:00:57 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:48:50 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef
+#ifndef ROBOTOMYREQUESTFORM_HPP
 # define ROBOTOMYREQUESTFORM_HPP
 
 # include "AForm.hpp"
@@ -30,6 +30,6 @@ class	RobotomyRequestForm : public AForm
 		std::string	getTarget();
 
 		void	execute(const Bureaucrat& ex) const;
-}
+};
 
 #endif // ROBOTOMYREQUESTFORM_HPP
