@@ -6,12 +6,14 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 22:29:07 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/18 17:48:40 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/18 18:51:34 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
+
+#include "AForm.hpp"
 
 # include <string>
 # include <cstdint>
@@ -23,8 +25,8 @@
 class Bureaucrat
 {
 	private:
-		const std::string	_name;
-		uint8_t				_grade;
+		const std::string	name_;
+		uint8_t				grade_;
 	public:
 		Bureaucrat();
 		Bureaucrat(const std::string& name, const int grade);
@@ -36,22 +38,22 @@ class Bureaucrat
 		std::uint8_t	getGrade() const;
 		std::string		getName() const;
 
-		void			signForm(AForm& f);
-		void			executeForm(AForm& f);
+		void			incrementGrade();
+		void			decrementGrade();
 
-		void		incrementGrade();
-		void		decrementGrade();
+		void			signForm(AForm& f);
+		void			executeForm(const AForm& form);
 
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char* what() const throw();
+				virtual const char*	what() const throw();
 		};
 
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char* what() const throw();
+				virtual const char*	what() const throw();
 		};
 };
 

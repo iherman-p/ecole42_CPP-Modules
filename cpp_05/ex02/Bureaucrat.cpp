@@ -6,110 +6,98 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 22:47:17 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/16 15:31:10 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/18 18:53:49 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaurcrat.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat()
-	: _name("Joey"), _grade(GRADE_MIN)
+	: name_("Default Joey"), grade_(GRADE_MIN)
 {
-
 }
 
-Bureaucrat::Bureaucrat(const std::string name, const int grade)
-	: _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(const std::string& name, const int grade)
+	: name_(name), grade_(grade)
 {
-	if (_grade < GRADE_MAX)
-		throw GradeTooLowException();
-	if (_grade > GRADE_MIN)
+	if (grade_ < GRADE_MAX)
 		throw GradeTooHighException();
+	else if (grade_ > GRADE_MIN)
+		throw GradeTooLowException();
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other)
-	: _name(other._name), _grade(other._grade)
+	: name_(other.name_), grade_(other.grade_)
 {
-	
 }
 
-Bureaucrat::~Bureaucrat() throw();
+Bureaucrat::~Bureaucrat() throw()
 {
 }
 
 Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& other)
 {
-	this->_grade = other._grade;
+	this->grade_ = other.grade_;
 	return *this;
 }
 
 std::uint8_t	Bureaucrat::getGrade() const
 {
-	return _grade;
+	return grade_;
 }
 
 std::string		Bureaucrat::getName() const
 {
-	return _name;
-}
-
-void	Bureaucrat::signForm(const AForm& f)
-{
-	try
-	{
-		f.beSigned(*this);
-		std::cout << _name << " has signed " << f.getName() << std::endl;	
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << _name << " could not sign " << f.getName() << " because " << e.what() << std::endl;
-	}
-}
-
-void	Bureaucrat::executeForm(const AForm& f)
-{
-	try
-	{
-		f.execute(*this);
-		std::cout << _name << " has signed " << f.getName() << std::endl;	
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << _name << " could not sign " << f.getName() << " because " << e.what() << std::endl;
-	}
+	return name_;
 }
 
 void		Bureaucrat::incrementGrade()
 {
-	if (_grade < GRADE_MIN)
-		_grade--;
-	else
-		throw Bureaucrat::GradeTooLowException();
+	if (grade_ >= GRADE_MIN)
+		throw GradeTooLowException();
+	grade_++;
 }
 
 void		Bureaucrat::decrementGrade()
 {
-	if (_grade > GRADE_MAX)
-		_grade++;
-	else
-		throw Bureaucrat::GradeTooHighException();
+	if (grade_ >= GRADE_MAX)
+		throw GradeTooHighException();
+	grade_--;
 }
 
-virtual const char* Bureaucrat::GradeTooHighException::what() const throw()
+void		Bureaucrat::signForm(AForm& f)
 {
-	std::string	msg = "Bureaucrat grade too high (limits: " + GRADE_MAX + " - " + GRADE_MIN + ')';
+	try
+	{
+		f.beSigned(*this);
+		std::cout << name_ << " signed " << f.getName();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "Bureaucrat couldn't sign " << f.getName() << " because: " << e.what() << std::endl;
+	}
+}
+
+void		Bureaucrat::executeForm(const AForm& form)
+{
+	WRITE HERE!!
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+	std::string	msg = "Bureaucrat grade too high (limits: " + std::to_string(GRADE_MAX) + " - " + std::to_string(GRADE_MIN) + ')';
 	return (msg.c_str());
 }
 
-virtual const char* Bureaucrat::GradeTooLowException::what() const throw()
+const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-	std::string	msg = "Bureaucrat grade too low (limits: " + GRADE_MAX + " - " + GRADE_MIN + ')';
+	std::string	msg = "Bureaucrat grade too low (limits: " + std::to_string(GRADE_MAX) + " - " + std::to_string(GRADE_MIN) + ')';
 	return (msg.c_str());
 }
 
 std::ostream&	operator<<(std::ostream& out, const Bureaucrat& obj)
 {
-	std::cout << _name << " has grade " << _grade;
+	out << obj.getName() << "Bureaucrat grade: " << obj.getGrade();
 	return out;
 }
