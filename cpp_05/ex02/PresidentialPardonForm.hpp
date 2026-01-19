@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 23:39:39 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/18 17:48:43 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:27:41 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,21 @@
 class	PresidentialPardonForm : public AForm
 {
 	private:
-		std::string	_target;
+		static const int kGradeSign_;
+		static const int kGradeExec_;
+
+		std::string	target_;
 	public:
 		PresidentialPardonForm();
-		PresidentialPardonForm(const std::string name);
+		PresidentialPardonForm(const std::string& target);
 		PresidentialPardonForm(const PresidentialPardonForm& other);
 		~PresidentialPardonForm();
 
 		PresidentialPardonForm&	operator=(PresidentialPardonForm& other);
 
-		std::string	getTarget();
+		std::string		getTarget();
 
-		void	execute(const Bureaucrat& ex) const;
+		virtual void	executeAction(const Bureaucrat& b) const;
 };
 
 #endif //PRESIDENTIALPARDONFORM_HPP

@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
+/*   RobotomyRequestForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/14 13:21:06 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/16 20:22:00 by iherman-         ###   ########.fr       */
+/*   Created: 2025/09/14 13:21:34 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/19 16:29:02 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
+
+const int RobotomyRequestForm::kGradeSign_ = 25;
+const int RobotomyRequestForm::kGradeExec_ = 5;
 
 RobotomyRequestForm::RobotomyRequestForm()
-	: _AForm("RobotomyRequestForm", 145, 137), target("Default");
+	: AForm("RobotomyRequestForm", kGradeSign_, kGradeExec_), target_("Default")
 {
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
-	: _AForm("RobotomyRequestForm", 145, 137), target(target);
+	: AForm("RobotomyRequestForm", kGradeSign_, kGradeExec_), target_(target)
 {
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other);
-	: _AForm(other), _target(other._target);
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other)
+	: AForm(other), target_(other.target_)
 {
 }
 
@@ -37,29 +37,18 @@ RobotomyRequestForm::~RobotomyRequestForm()
 RobotomyRequestForm&	RobotomyRequestForm::operator=(RobotomyRequestForm& other)
 {
 	AForm::operator=(other);
-	_target = other._target;
+	target_ = other.target_;
 }
 
 std::string	RobotomyRequestForm::getTarget()
 {
-	return _target;
+	return target_;
 }
 
-void	RobotomyRequestForm::execute(const Bureaucrat& ex) const
+void		RobotomyRequestForm::executeAction(const Bureaucrat& b) const
 {
-	if (ex.getGrade() < _execReq)
-	{
-		throw AForm::GradeTooLowException;
-		return ;		
-	}
-	if (!_isSigned)
-	{
-		std::cout << _name << " cannot be executed as it isn't signed" << std::endl;
-		return ;
-	}
 	std::srand(static_cast<unsigned int>(std::time(0)));
 	if (std::rand() % 100 < 50)
 		std::cout << _target << " has been robotomized." << std::endl;
 	else
-		
 }

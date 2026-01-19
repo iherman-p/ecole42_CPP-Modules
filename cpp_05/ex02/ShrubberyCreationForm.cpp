@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/13 13:20:02 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/16 15:38:34 by iherman-         ###   ########.fr       */
+/*   Created: 2025/09/14 13:21:34 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/19 16:29:02 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
+const int ShrubberyCreationForm::kGradeSign_ = 145;
+const int ShrubberyCreationForm::kGradeExec_ = 137;
+
 ShrubberyCreationForm::ShrubberyCreationForm()
-	: _AForm("ShrubberyCreationForm", 145, 137), target("Default");
+	: AForm("ShrubberyCreationForm", kGradeSign_, kGradeExec_), target_("Default")
 {
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
-	: _AForm("ShrubberyCreationForm", 145, 137), target(target);
+	: AForm("ShrubberyCreationForm", kGradeSign_, kGradeExec_), target_(target)
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other);
-	: _AForm(other), _target(other._target);
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
+	: AForm(other), target_(other.target_)
 {
 }
 
@@ -34,35 +37,22 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 ShrubberyCreationForm&	ShrubberyCreationForm::operator=(ShrubberyCreationForm& other)
 {
 	AForm::operator=(other);
-	_target = other._target;
+	target_ = other.target_;
 }
 
 std::string	ShrubberyCreationForm::getTarget()
 {
-	return _target;
+	return target_;
 }
 
-void	ShrubberyCreationForm::execute(const Bureaucrat& ex) const
+void		ShrubberyCreationForm::executeAction(const Bureaucrat& b) const
 {
-	if (ex.getGrade() < _execReq)
-	{
-		throw AForm::GradeTooLowException;
-		return ;		
-	}
-	if (!_isSigned)
-	{
-		std::cout << _name << " cannot be executed as it isn't signed" << std::endl;
-		return ;
-	}
-	std::ostream	file(target + "_Shrubbery");
-	file << "       _-_";
-	file << "    /~~   ~~\\";
-	file << " /~~         ~~\\";
-	file << "{               }";
-	file << " \  _-     -_  /";
-	file << "   ~  \\\\ //  ~";
-	file << "_- -   | | _- _";
-	file << "  _ -  | |   -_";
-	file << "      // \\\\";
-	file.close();
+	// make file
+
+	file << "\n"
+		<< "\n"
+		<< "\n"
+		<< "\n"
+		<< "\n"
+		<< "\n";
 }

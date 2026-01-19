@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/07 23:39:36 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/18 17:48:50 by iherman-         ###   ########.fr       */
+/*   Created: 2025/09/07 23:39:39 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/19 16:27:41 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,21 @@
 class	RobotomyRequestForm : public AForm
 {
 	private:
-		std::string	_target;
+		static const int kGradeSign_;
+		static const int kGradeExec_;
+
+		std::string	target_;
 	public:
 		RobotomyRequestForm();
-		RobotomyRequestForm(const std::string name);
+		RobotomyRequestForm(const std::string& target);
 		RobotomyRequestForm(const RobotomyRequestForm& other);
 		~RobotomyRequestForm();
 
 		RobotomyRequestForm&	operator=(RobotomyRequestForm& other);
 
-		std::string	getTarget();
+		std::string		getTarget();
 
-		void	execute(const Bureaucrat& ex) const;
+		virtual void	executeAction(const Bureaucrat& b) const;
 };
 
-#endif // ROBOTOMYREQUESTFORM_HPP
+#endif //ROBOTOMYREQUESTFORM_HPP

@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 22:53:21 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/18 18:52:50 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:37:24 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,15 @@ void			AForm::beSigned(const Bureaucrat& b)
 	if (b.getGrade() > signReq_)
 		throw GradeTooLowException();
 	isSigned_ = true;		
+}
+
+void			AForm::execute(const Bureaucrat& b) const
+{
+	if (b.getGrade() > execReq_)
+		throw GradeTooLowException();
+	if (!isSigned_)
+		haha 
+	this->executeAction(b);
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()

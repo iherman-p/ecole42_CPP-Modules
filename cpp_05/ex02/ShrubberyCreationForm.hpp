@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/07 23:39:45 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/18 17:48:56 by iherman-         ###   ########.fr       */
+/*   Created: 2025/09/07 23:39:39 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/19 16:27:41 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 class	ShrubberyCreationForm : public AForm
 {
 	private:
-		std::string	_target;
+		static const int kGradeSign_;
+		static const int kGradeExec_;
+
+		std::string	target_;
 	public:
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(const std::string& target);
@@ -27,9 +30,9 @@ class	ShrubberyCreationForm : public AForm
 
 		ShrubberyCreationForm&	operator=(ShrubberyCreationForm& other);
 
-		std::string	getTarget();
+		std::string		getTarget();
 
-		void	execute(const Bureaucrat& ex) const;
+		virtual void	executeAction(const Bureaucrat& b) const;
 };
 
-#endif // SHRUBBERYCREATIONFORM_HPP
+#endif //SHRUBBERYCREATIONFORM_HPP

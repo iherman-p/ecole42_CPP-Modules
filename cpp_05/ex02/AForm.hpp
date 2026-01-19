@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 23:19:27 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/18 18:51:59 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:15:37 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ class AForm
 		bool					isSigned_;
 		const std::uint8_t		signReq_;
 		const std::uint8_t		execReq_;
+	protected:
+		virtual void			executeAction(const Bureaucrat& b) const = 0;
 	public:
 		AForm();
 		AForm(const std::string& name, const int signReq, const int execReq);
@@ -39,7 +41,7 @@ class AForm
 		std::uint8_t			getExecReq() const;
 
 		void					beSigned(const Bureaucrat& b);
-		virtual void			execute(const Bureaucrat& b) const = 0;
+		void					execute(const Bureaucrat& b) const;
 
 		class GradeTooLowException : public std::exception
 		{

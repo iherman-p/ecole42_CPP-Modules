@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 22:47:17 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/18 18:53:49 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:03:41 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void		Bureaucrat::signForm(AForm& f)
 	}
 }
 
-void		Bureaucrat::executeForm(const AForm& form)
+void		Bureaucrat::executeForm(const AForm& f)
 {
-	WRITE HERE!!
+	f.execute(*this);
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()

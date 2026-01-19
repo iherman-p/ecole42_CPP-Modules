@@ -6,24 +6,27 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 13:21:34 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/16 20:19:13 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:29:02 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
+const int PresidentialPardonForm::kGradeSign_ = 25;
+const int PresidentialPardonForm::kGradeExec_ = 5;
+
 PresidentialPardonForm::PresidentialPardonForm()
-	: _AForm("PresidentialPardonForm", 145, 137), target("Default");
+	: AForm("PresidentialPardonForm", kGradeSign_, kGradeExec_), target_("Default")
 {
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string& target)
-	: _AForm("PresidentialPardonForm", 145, 137), target(target);
+	: AForm("PresidentialPardonForm", kGradeSign_, kGradeExec_), target_(target)
 {
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other);
-	: _AForm(other), _target(other._target);
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other)
+	: AForm(other), target_(other.target_)
 {
 }
 
@@ -34,25 +37,15 @@ PresidentialPardonForm::~PresidentialPardonForm()
 PresidentialPardonForm&	PresidentialPardonForm::operator=(PresidentialPardonForm& other)
 {
 	AForm::operator=(other);
-	_target = other._target;
+	target_ = other.target_;
 }
 
 std::string	PresidentialPardonForm::getTarget()
 {
-	return _target;
+	return target_;
 }
 
-void	PresidentialPardonForm::execute(const Bureaucrat& ex) const
+void		PresidentialPardonForm::executeAction(const Bureaucrat& b) const
 {
-	if (ex.getGrade() < _execReq)
-	{
-		throw AForm::GradeTooLowException();
-		return ;
-	}
-	if (!_isSigned)
-	{
-		throw FormNotSignedException();
-		return ;
-	}
-	std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;		
+	
 }
