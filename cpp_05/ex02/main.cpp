@@ -5,33 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/16 14:53:55 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/16 15:25:59 by iherman-         ###   ########.fr       */
+/*   Created: 2026/01/20 17:40:27 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/20 22:14:59 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Bureaucrat.hpp"
+#include "AForm.hpp"
+#include <iostream>
 
-int	main()
+int main()
 {
-	PresidentialPardonForm	pardonForm("Eliot");
-	RobotomyRequestForm		roboForm("Eliot");
-	ShrubberyCreationForm	shrubForm("shrub_file");
+	ShrubberyCreationForm	shrub_form("Beautiful");
+	RobotomyRequestForm		robo_form("John Davis");
+	PresidentialPardonForm	pardon_form("Davis Johns");
 
-	Bureaucrat				Craig("Craig", GRADE_MAX);
-	Bureaucrat				Liam("Liam", GRADE_MIN);
+	Bureaucrat				b1("Bureaucrat Bart", 1);
+	Bureaucrat				b2("Bad Bart", 150);
 
-	Liam.execute(pardonForm);
-	Craig.execute(pardonForm);
-	Liam.signForm(pardonForm);
-	Liam.executeForm(pardonForm);
-	Craig.executeForm(pardonForm);
+	try
+	{
+		b2.signForm(shrub_form);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
 
-	Craig.signForm(roboForm);
-	Craig.signForm(shrubForm);
-	Craig.executeForm(roboForm);
-	Craig.executeForm(shrubForm);
+	try
+	{
+		b1.signForm(shrub_form);
+		b1.executeForm(shrub_form);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
 }

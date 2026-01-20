@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+#include <iostream>
+#include <fstream>
 
 const int ShrubberyCreationForm::kGradeSign_ = 145;
 const int ShrubberyCreationForm::kGradeExec_ = 137;
@@ -38,6 +40,7 @@ ShrubberyCreationForm&	ShrubberyCreationForm::operator=(ShrubberyCreationForm& o
 {
 	AForm::operator=(other);
 	target_ = other.target_;
+	return *this;
 }
 
 std::string	ShrubberyCreationForm::getTarget()
@@ -45,14 +48,21 @@ std::string	ShrubberyCreationForm::getTarget()
 	return target_;
 }
 
-void		ShrubberyCreationForm::executeAction(const Bureaucrat& b) const
+void		ShrubberyCreationForm::executeAction() const
 {
-	// make file
+	std::ofstream file;
+	file.open((target_ + std::string("_shrubbery")).c_str());
 
-	file << "\n"
-		<< "\n"
-		<< "\n"
-		<< "\n"
-		<< "\n"
-		<< "\n";
+	if (!file.is_open())
+		std::cerr << "Could not create " << target_ + "_shrubbery" << std::endl;
+
+	file << "       _-_\n"
+		<< "    /~~   ~~\\\n"
+		<< " /~~         ~~\\\n"
+		<< "{               }\n"
+		<< " \\  _-     -_  /\n"
+		<< "   ~  \\\\ //  ~\n"
+		<< "_- -   | | _- _\n"
+		<< "  _ -  | |   -_\n"
+		<< "      // \\\\\n";
 }

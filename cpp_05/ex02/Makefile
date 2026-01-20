@@ -1,6 +1,8 @@
 NAME = test
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
+SRC = main.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Bureaucrat.cpp AForm.cpp
+
+HEADERS = PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp Bureaucrat.hpp AForm.hpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -8,7 +10,7 @@ FLAGS= -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEADERS)
 	@c++ $(FLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.cpp

@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 23:19:27 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/19 16:15:37 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/20 21:58:34 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FORM_HPP
 
 # include <string>
-# include <cstdint>
 # include <ostream>
 # include "Bureaucrat.hpp"
 
@@ -23,10 +22,10 @@ class AForm
 	private:
 		const std::string		name_;
 		bool					isSigned_;
-		const std::uint8_t		signReq_;
-		const std::uint8_t		execReq_;
+		const int				signReq_;
+		const int				execReq_;
 	protected:
-		virtual void			executeAction(const Bureaucrat& b) const = 0;
+		virtual void			executeAction() const = 0;
 	public:
 		AForm();
 		AForm(const std::string& name, const int signReq, const int execReq);
@@ -37,8 +36,8 @@ class AForm
 
 		const std::string&		getName() const;
 		bool					getSigned() const;
-		std::uint8_t			getSignReq() const;
-		std::uint8_t			getExecReq() const;
+		int						getSignReq() const;
+		int						getExecReq() const;
 
 		void					beSigned(const Bureaucrat& b);
 		void					execute(const Bureaucrat& b) const;
@@ -50,6 +49,12 @@ class AForm
 		};
 
 		class GradeTooHighException : public std::exception
+		{
+			public:
+				virtual const char	*what() const throw();
+		};
+
+		class FormNotSignedException : public std::exception
 		{
 			public:
 				virtual const char	*what() const throw();

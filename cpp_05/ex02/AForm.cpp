@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 22:53:21 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/19 16:37:24 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/20 22:13:48 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ bool			AForm::getSigned() const
 	return isSigned_;
 }
 
-std::uint8_t	AForm::getSignReq() const
+int			AForm::getSignReq() const
 {
 	return signReq_;
 }
 
-std::uint8_t	AForm::getExecReq() const
+int			AForm::getExecReq() const
 {
 	return execReq_;
 }
@@ -77,20 +77,23 @@ void			AForm::execute(const Bureaucrat& b) const
 	if (b.getGrade() > execReq_)
 		throw GradeTooLowException();
 	if (!isSigned_)
-		haha 
-	this->executeAction(b);
+		throw FormNotSignedException();
+	this->executeAction();
 }
 
-const char* Bureaucrat::GradeTooHighException::what() const throw()
+const char* AForm::GradeTooHighException::what() const throw()
 {
-	std::string	msg = "Grade too high (limits: " + std::to_string(GRADE_MAX) + " - " + std::to_string(GRADE_MIN) + ')';
-	return (msg.c_str());
+	return "Grade too high (limits: 1 - 150)";
 }
 
-const char* Bureaucrat::GradeTooLowException::what() const throw()
+const char* AForm::GradeTooLowException::what() const throw()
 {
-	std::string	msg = "Grade too low (limits: " + std::to_string(GRADE_MAX) + " - " + std::to_string(GRADE_MIN) + ')';
-	return (msg.c_str());
+	return "Grade too low (limits: 1 - 150)";
+}
+
+const char*	AForm::FormNotSignedException::what() const throw()
+{
+	return "Form has to be signed before execution";	
 }
 
 std::ostream&	operator<<(std::ostream& out, const AForm& f)

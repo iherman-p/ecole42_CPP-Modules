@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 23:39:39 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/19 16:27:41 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/20 21:56:04 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class	PresidentialPardonForm : public AForm
 
 		std::string		getTarget();
 
-		virtual void	executeAction(const Bureaucrat& b) const;
+		virtual void	executeAction() const;
 };
 
 #endif //PRESIDENTIALPARDONFORM_HPP

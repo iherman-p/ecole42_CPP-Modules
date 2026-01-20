@@ -32,7 +32,7 @@ class	ShrubberyCreationForm : public AForm
 
 		std::string		getTarget();
 
-		virtual void	executeAction(const Bureaucrat& b) const;
+		virtual void	executeAction() const;
 };
 
 #endif //SHRUBBERYCREATIONFORM_HPP

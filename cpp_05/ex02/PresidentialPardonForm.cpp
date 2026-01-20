@@ -6,11 +6,12 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 13:21:34 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/19 16:29:02 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/20 21:55:39 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
+#include <iostream>
 
 const int PresidentialPardonForm::kGradeSign_ = 25;
 const int PresidentialPardonForm::kGradeExec_ = 5;
@@ -38,6 +39,7 @@ PresidentialPardonForm&	PresidentialPardonForm::operator=(PresidentialPardonForm
 {
 	AForm::operator=(other);
 	target_ = other.target_;
+	return *this;
 }
 
 std::string	PresidentialPardonForm::getTarget()
@@ -45,7 +47,7 @@ std::string	PresidentialPardonForm::getTarget()
 	return target_;
 }
 
-void		PresidentialPardonForm::executeAction(const Bureaucrat& b) const
+void		PresidentialPardonForm::executeAction() const
 {
-	
+	std::cout << target_ << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
