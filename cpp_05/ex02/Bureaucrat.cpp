@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 22:47:17 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/20 22:12:24 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/20 23:25:46 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,28 @@ void		Bureaucrat::decrementGrade()
 
 void		Bureaucrat::signForm(AForm& f)
 {
-	f.beSigned(*this);
-	std::cout << name_ << " signed " << f.getName();
+	try
+	{
+		f.beSigned(*this);
+		std::cout << name_ << " signed " << f.getName() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout <<  "Bureaucrat " << name_ << " couldn't sign " << f.getName() << " because: " << e.what() << std::endl;
+	}
 }
 
 void		Bureaucrat::executeForm(const AForm& f)
 {
-	f.execute(*this);
+	try
+	{
+		f.execute(*this);
+		std::cout << name_ << " executed " << f.getName() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Bureaucrat " << name_ << " couldn't execute " << f.getName() << " because: " << e.what() << std::endl;
+	}
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()

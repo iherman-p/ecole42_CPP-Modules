@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 17:40:27 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/20 22:14:59 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/20 23:24:08 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main()
 	RobotomyRequestForm		robo_form("John Davis");
 	PresidentialPardonForm	pardon_form("Davis Johns");
 
-	Bureaucrat				b1("Bureaucrat Bart", 1);
+	Bureaucrat				b1("Beautiful Bart", 1);
 	Bureaucrat				b2("Bad Bart", 150);
 
 	try
