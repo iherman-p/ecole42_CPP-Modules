@@ -1,8 +1,8 @@
 NAME = test
 
-SRC = main.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Bureaucrat.cpp AForm.cpp Intern.cpp
+SRC = main.cpp Bureaucrat.cpp Form.cpp
 
-HEADERS = PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp Bureaucrat.hpp AForm.hpp Intern.hpp
+HEADERS = Bureaucrat.hpp Form.hpp
 
 OBJ = $(SRC:.cpp=.o)
 

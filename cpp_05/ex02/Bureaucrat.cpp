@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 22:47:17 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/20 23:25:46 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/21 14:50:28 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ std::string		Bureaucrat::getName() const
 	return name_;
 }
 
-void		Bureaucrat::incrementGrade()
+void	Bureaucrat::incrementGrade()
+{
+	if (grade_ <= GRADE_MAX)
+		throw GradeTooHighException();
+	--grade_;
+}
+
+void	Bureaucrat::decrementGrade()
 {
 	if (grade_ >= GRADE_MIN)
 		throw GradeTooLowException();
-	grade_++;
-}
-
-void		Bureaucrat::decrementGrade()
-{
-	if (grade_ >= GRADE_MAX)
-		throw GradeTooHighException();
-	grade_--;
+	++grade_;
 }
 
 void		Bureaucrat::signForm(AForm& f)
@@ -105,6 +105,6 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 
 std::ostream&	operator<<(std::ostream& out, const Bureaucrat& obj)
 {
-	out << obj.getName() << "Bureaucrat grade: " << obj.getGrade();
+	out << obj.getName() << " Bureaucrat grade: " << obj.getGrade();
 	return out;
 }

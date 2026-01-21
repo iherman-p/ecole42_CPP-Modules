@@ -6,11 +6,12 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 22:47:17 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/20 23:20:30 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:05:32 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat()
@@ -42,7 +43,7 @@ Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& other)
 	return *this;
 }
 
-std::uint8_t	Bureaucrat::getGrade() const
+int				Bureaucrat::getGrade() const
 {
 	return grade_;
 }
@@ -52,18 +53,18 @@ std::string		Bureaucrat::getName() const
 	return name_;
 }
 
-void		Bureaucrat::incrementGrade()
+void	Bureaucrat::incrementGrade()
+{
+	if (grade_ <= GRADE_MAX)
+		throw GradeTooHighException();
+	--grade_;
+}
+
+void	Bureaucrat::decrementGrade()
 {
 	if (grade_ >= GRADE_MIN)
 		throw GradeTooLowException();
-	grade_++;
-}
-
-void		Bureaucrat::decrementGrade()
-{
-	if (grade_ >= GRADE_MAX)
-		throw GradeTooHighException();
-	grade_--;
+	++grade_;
 }
 
 void		Bureaucrat::signForm(Form& f)
@@ -81,18 +82,16 @@ void		Bureaucrat::signForm(Form& f)
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-	std::string	msg = "Bureaucrat grade too high (limits: " + std::to_string(GRADE_MAX) + " - " + std::to_string(GRADE_MIN) + ')';
-	return (msg.c_str());
+	return "Bureaucrat grade too high (limits: 1 - 150)";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-	std::string	msg = "Bureaucrat grade too low (limits: " + std::to_string(GRADE_MAX) + " - " + std::to_string(GRADE_MIN) + ')';
-	return (msg.c_str());
+	return "Bureaucrat grade too low (limits: 1 - 150)";
 }
 
 std::ostream&	operator<<(std::ostream& out, const Bureaucrat& obj)
 {
-	out << obj.getName() << "Bureaucrat grade: " << obj.getGrade();
+	out << obj.getName() << " Bureaucrat grade: " << obj.getGrade();
 	return out;
 }

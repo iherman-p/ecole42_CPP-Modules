@@ -22,8 +22,6 @@ class	RobotomyRequestForm : public AForm
 		static const int kGradeExec_;
 
 		std::string	target_;
-	protected:
-		virtual void	executeAction() const;
 	public:
 		RobotomyRequestForm();
 		RobotomyRequestForm(const std::string& target);
@@ -33,6 +31,8 @@ class	RobotomyRequestForm : public AForm
 		RobotomyRequestForm&	operator=(RobotomyRequestForm& other);
 
 		std::string		getTarget();
+
+		virtual void	executeAction() const;
 };
 
 #endif //ROBOTOMYREQUESTFORM_HPP

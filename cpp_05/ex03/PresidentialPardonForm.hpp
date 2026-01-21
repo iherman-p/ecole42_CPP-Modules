@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                         :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 23:39:39 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/19 16:27:41 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/20 21:56:04 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+# define PRESIDENTIALPARDONFORM_HPP
 
 # include "AForm.hpp"
 
-class	RobotomyRequestForm : public AForm
+class	PresidentialPardonForm : public AForm
 {
 	private:
 		static const int kGradeSign_;
 		static const int kGradeExec_;
 
 		std::string	target_;
-	protected:
-		virtual void	executeAction() const;
 	public:
-		RobotomyRequestForm();
-		RobotomyRequestForm(const std::string& target);
-		RobotomyRequestForm(const RobotomyRequestForm& other);
-		~RobotomyRequestForm();
+		PresidentialPardonForm();
+		PresidentialPardonForm(const std::string& target);
+		PresidentialPardonForm(const PresidentialPardonForm& other);
+		~PresidentialPardonForm();
 
-		RobotomyRequestForm&	operator=(RobotomyRequestForm& other);
+		PresidentialPardonForm&	operator=(PresidentialPardonForm& other);
 
 		std::string		getTarget();
+
+		virtual void	executeAction() const;
 };
 
-#endif //ROBOTOMYREQUESTFORM_HPP
+#endif //PRESIDENTIALPARDONFORM_HPP

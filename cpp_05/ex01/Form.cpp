@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 22:53:21 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/18 18:46:37 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:06:45 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ bool			Form::getSigned() const
 	return isSigned_;
 }
 
-std::uint8_t	Form::getSignReq() const
+int				Form::getSignReq() const
 {
 	return signReq_;
 }
 
-std::uint8_t	Form::getExecReq() const
+int				Form::getExecReq() const
 {
 	return execReq_;
 }
@@ -72,16 +72,14 @@ void			Form::beSigned(const Bureaucrat& b)
 	isSigned_ = true;		
 }
 
-const char* Bureaucrat::GradeTooHighException::what() const throw()
+const char* Form::GradeTooHighException::what() const throw()
 {
-	std::string	msg = "Grade too high (limits: " + std::to_string(GRADE_MAX) + " - " + std::to_string(GRADE_MIN) + ')';
-	return (msg.c_str());
+	return "Grade too high (limits: 1 - 150)";
 }
 
-const char* Bureaucrat::GradeTooLowException::what() const throw()
+const char* Form::GradeTooLowException::what() const throw()
 {
-	std::string	msg = "Grade too low (limits: " + std::to_string(GRADE_MAX) + " - " + std::to_string(GRADE_MIN) + ')';
-	return (msg.c_str());
+	return "Grade too low (limits: 1 - 150)";
 }
 
 std::ostream&	operator<<(std::ostream& out, const Form& f)

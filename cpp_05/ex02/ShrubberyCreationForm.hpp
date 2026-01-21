@@ -22,6 +22,8 @@ class	ShrubberyCreationForm : public AForm
 		static const int kGradeExec_;
 
 		std::string	target_;
+	protected:
+		virtual void	executeAction() const;
 	public:
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(const std::string& target);
@@ -31,8 +33,6 @@ class	ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm&	operator=(ShrubberyCreationForm& other);
 
 		std::string		getTarget();
-
-		virtual void	executeAction() const;
 };
 
 #endif //SHRUBBERYCREATIONFORM_HPP

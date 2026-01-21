@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 23:39:39 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/20 21:56:04 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:20:01 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ class	PresidentialPardonForm : public AForm
 		static const int kGradeExec_;
 
 		std::string	target_;
+	protected:
+		virtual void	executeAction() const;
 	public:
 		PresidentialPardonForm();
 		PresidentialPardonForm(const std::string& target);
@@ -31,8 +33,6 @@ class	PresidentialPardonForm : public AForm
 		PresidentialPardonForm&	operator=(PresidentialPardonForm& other);
 
 		std::string		getTarget();
-
-		virtual void	executeAction() const;
 };
 
 #endif //PRESIDENTIALPARDONFORM_HPP

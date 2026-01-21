@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                         :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,29 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#ifndef SHRUBBERYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
 
 # include "AForm.hpp"
 
-class	RobotomyRequestForm : public AForm
+class	ShrubberyCreationForm : public AForm
 {
 	private:
 		static const int kGradeSign_;
 		static const int kGradeExec_;
 
 		std::string	target_;
-	protected:
-		virtual void	executeAction() const;
 	public:
-		RobotomyRequestForm();
-		RobotomyRequestForm(const std::string& target);
-		RobotomyRequestForm(const RobotomyRequestForm& other);
-		~RobotomyRequestForm();
+		ShrubberyCreationForm();
+		ShrubberyCreationForm(const std::string& target);
+		ShrubberyCreationForm(const ShrubberyCreationForm& other);
+		~ShrubberyCreationForm();
 
-		RobotomyRequestForm&	operator=(RobotomyRequestForm& other);
+		ShrubberyCreationForm&	operator=(ShrubberyCreationForm& other);
 
 		std::string		getTarget();
+
+		virtual void	executeAction() const;
 };
 
-#endif //ROBOTOMYREQUESTFORM_HPP
+#endif //SHRUBBERYCREATIONFORM_HPP
