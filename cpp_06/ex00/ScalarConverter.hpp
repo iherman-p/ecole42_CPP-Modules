@@ -6,19 +6,20 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:41:41 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/28 16:27:56 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:23:36 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
+#include <string>
+
 class ScalarConverter
 {
-	private:
-		void	ScalarConverter() = 0;
 	public:
-		static void convert() const;
+		virtual ~ScalarConverter() = 0;
+		static void	convert(const std::string& data);
 };
 
 #endif // SCALARCONVERTER_HPP

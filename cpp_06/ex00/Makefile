@@ -1,6 +1,8 @@
-NAME = convert
+NAME = test
 
-SRC = main.cpp
+SRC = main.cpp ScalarConverter.cpp
+
+HEADERS = ScalarConverter.hpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -8,7 +10,7 @@ FLAGS= -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEADERS)
 	@c++ $(FLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.cpp
