@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:41:41 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/22 18:23:36 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:26:28 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 class ScalarConverter
 {
+	private:
+		ScalarConverter();	
 	public:
-		virtual ~ScalarConverter() = 0;
 		static void	convert(const std::string& data);
 };
 

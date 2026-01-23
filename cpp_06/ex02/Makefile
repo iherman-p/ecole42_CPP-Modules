@@ -1,8 +1,8 @@
 NAME = test
 
-SRC = main.cpp Serializer.cpp
+SRC = main.cpp generate.cpp identify.cpp Base.cpp
 
-HEADERS = Serializer.hpp Data.hpp
+HEADERS = A.hpp B.hpp C.hpp Base.hpp
 
 OBJ = $(SRC:.cpp=.o)
 

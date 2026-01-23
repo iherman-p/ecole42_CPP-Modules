@@ -6,13 +6,15 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 23:16:06 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/28 17:17:28 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:53:20 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include <cstdlib>
+#include <ctime>
 
 Base*	generate()
 {

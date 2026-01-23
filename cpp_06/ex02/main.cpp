@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 23:13:19 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/23 23:15:05 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:57:28 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 #include "B.hpp"
 #include "C.hpp"
 
+Base*	generate();
+void	identify(Base* ident);
+void	identify(Base& ident);
+
 int main()
 {
-	Base*	bestClassEver = generate();
-	identify(bestClassEver);
-	identify(*bestClassEver);
+	Base*	best_class_ever = generate();
+	identify(best_class_ever);
+	identify(*best_class_ever);
 }

@@ -6,13 +6,14 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 23:16:10 by iherman-          #+#    #+#             */
-/*   Updated: 2025/09/28 17:25:59 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:59:14 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include <iostream>
 
 void	identify(Base* ident)
 {
@@ -34,24 +35,24 @@ void	identify(Base& ident)
 
 	try
 	{
-		dynamic_cast<A&>(ident);
+		(void) dynamic_cast<A&>(ident);
 		std::cout << "Object is type A" << std::endl;	
 		return ;
 	}
-	catch (const std::exception& e);
+	catch (const std::exception& e) {}
 	try
 	{
-		dynamic_cast<B&>(ident);
+		(void) dynamic_cast<B&>(ident);
 		std::cout << "Object is type B" << std::endl;	
 		return ;
 	}
-	catch (const std::exception& e);
+	catch (const std::exception& e) {}
 	try
 	{
-		dynamic_cast<C&>(ident);
+		(void) dynamic_cast<C&>(ident);
 		std::cout << "Object is type C" << std::endl;	
 		return ;
 	}
-	catch (const std::exception& e);
+	catch (const std::exception& e) {}
 	std::cout << "Object is unidentified derived type" << std::endl;
 }

@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Base.hpp                                           :+:      :+:    :+:   */
+/*   Base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/23 23:07:36 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/23 19:01:57 by iherman-         ###   ########.fr       */
+/*   Created: 2026/01/23 19:00:55 by iherman-          #+#    #+#             */
+/*   Updated: 2026/01/23 19:02:21 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BASE_HPP
-# define BASE_HPP
+#include "Base.hpp"
 
-class Base
+Base::~Base()
 {
-	public:
-		virtual ~Base();
-};
-
-#endif // BASE_HPP
+	
+}

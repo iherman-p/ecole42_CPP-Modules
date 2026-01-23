@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 22:55:20 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/18 17:43:59 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:49:42 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <string>
 
-typedef struct Data
+struct Data
 {
 	std::string message;
 };
