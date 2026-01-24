@@ -6,114 +6,70 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:41:36 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/23 19:27:17 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:08:36 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include <iostream>
-#include <string>
+#include <iomanip>
 #include <limits>
 #include <cstdlib>
 #include <cerrno>
 #include <cmath>
 
-static void	convertChar(const signed char c)
+template <typename T>
+static void	printChar(T num)
 {
 	std::cout << "char: ";
-	if (c < ' ' || c >= 127)
-		std::cout << "Non printable" << std::endl;
+	if (num > std::numeric_limits<signed char>::max()
+	 || num < std::numeric_limits<signed char>::min())
+		std::cout << "impossible" << std::endl;
+	else if (num < ' ' || num >= 127)
+		std::cout << "Non displayable" << std::endl;
 	else
-		std::cout << c << std::endl;
-
-	std::cout << "int: " << static_cast<int>(c) << std::endl;
-	std::cout << "float: " << static_cast<float>(c) << 'f' << std::endl;
-	std::cout << "double: " << static_cast<double>(c) << std::endl;
+		std::cout << static_cast<signed char>(num) << std::endl;
 }
 
-static void	convertInt(const long i)
+template <typename T>
+static void	printInt(T num)
 {
-	std::cout << "char: ";
-	if (i > std::numeric_limits<signed char>::max()
-	 || i < std::numeric_limits<signed char>::min())
-		std::cout << "Impossible" << std::endl;
-	else if (i < ' ' || i >= 127)
-		std::cout << "Non printable" << std::endl;
-	else
-		std::cout << static_cast<signed char>(i) << std::endl;
-
 	std::cout << "int: ";
-	if (i > std::numeric_limits<int>::max()
-	 || i < std::numeric_limits<int>::min())
-		std::cout << "Impossible" << std::endl;
+	if (num > std::numeric_limits<int>::max()
+	 || num < std::numeric_limits<int>::min())
+		std::cout << "impossible" << std::endl;
 	else
-		std::cout << static_cast<int>(i) << std::endl;
-
-	std::cout << "float: " << static_cast<float>(i) << 'f' << std::endl;
-
-	std::cout << "double: "<< static_cast<double>(i) << std::endl;
+		std::cout << static_cast<signed int>(num) << std::endl;
 }
 
-static void	convertFloat(const float f)
+template <typename T>
+static void	printFloat(T num)
 {
-	if (std::isnan(f) || std::isinf(f))
-	{
-		std::cout << "char: Impossible" << std::endl;
-		std::cout << "int: Impossible" << std::endl;
-		std::cout << "float: " << f << std::endl;
-		std::cout << "double: " << static_cast<double>(f) << std::endl;
-		return ;
-	}
-
-	std::cout << "char: ";
-	if (f > std::numeric_limits<signed char>::max()
-	 || f < std::numeric_limits<signed char>::min())
-		std::cout << "Impossible" << std::endl;
-	else if (f < ' ' || f >= 127)
-		std::cout << "Non printable" << std::endl;
-	else
-		std::cout << static_cast<signed char>(f) << std::endl;
-
-	std::cout << "int: ";
-	if (f > std::numeric_limits<int>::max()
-	 || f < std::numeric_limits<int>::min())
-		std::cout << "Impossible" << std::endl;
-	else
-		std::cout << static_cast<int>(f) << std::endl;
-
-	std::cout << "float: " << f << 'f' << std::endl;
-	std::cout << "double: " << static_cast<double>(f) << std::endl;
+	std::cout << std::setprecision(1) << std::fixed << static_cast<float>(num) << 'f' <<  std::endl;
 }
 
-static void	convertDouble(const double d)
+template <typename T>
+static void	printDouble(T num)
 {
-	if (std::isnan(d) || std::isinf(d))
-	{
-		std::cout << "char: Impossible" << std::endl;
-		std::cout << "int: Impossible" << std::endl;
-		std::cout << "float: " << static_cast<float>(d) << std::endl;
-		std::cout << "double: " << d << std::endl;
-		return ;
-	}
+	std::cout << std::setprecision(1) << std::fixed << static_cast<double>(num) << std::endl;
+}
 
-	std::cout << "char: ";
-	if (d > std::numeric_limits<signed char>::max()
-	 || d < std::numeric_limits<signed char>::min())
-		std::cout << "Impossible" << std::endl;
-	else if (d < ' ' || d >= 127)
-		std::cout << "Non printable" << std::endl;
-	else
-		std::cout << static_cast<signed char>(d) << std::endl;
+static void printInvalid()
+{
+	std::cout << "char: impossible\n";
+	std::cout << "int: impossible\n";
+	std::cout << "float: impossible\n";
+	std::cout << "double: impossible" << std::endl;
+}
 
-	std::cout << "int: ";
-	if (d > std::numeric_limits<int>::max()
-	 || d < std::numeric_limits<int>::min())
-		std::cout << "Impossible" << std::endl;
-	else
-		std::cout << static_cast<int>(d) << std::endl;
 
-	std::cout << "float: " << static_cast<float>(d) << 'f' << std::endl;
-	std::cout << "double: " << d << std::endl;
+template <typename T>
+static void	convertType(const T type)
+{
+	printChar(type);
+	printInt(type);
+	printFloat(type);
+	printDouble(type);
 }
 
 void ScalarConverter::convert(const std::string& data)
@@ -127,7 +83,7 @@ void ScalarConverter::convert(const std::string& data)
 	/* char */
 	if (data.size() == 1 && !std::isdigit(data[0]))
 	{
-		convertChar(data[0]);
+		convertType(data[0]);
 		return ;
 	}
 
@@ -139,9 +95,14 @@ void ScalarConverter::convert(const std::string& data)
 		errno = 0;
 		value = std::strtol(data.c_str(), &end, 10);
 
-		if (*end == '\0' && errno != ERANGE)
+		if (errno == ERANGE || value <) // logically inconsistent and unfinished
 		{
-			convertInt(value);
+			printInvalid();
+			return ;
+		}
+		else if (*end == '\0')
+		{
+			convertType(value);
 			return ;
 		}
 	}
@@ -153,16 +114,17 @@ void ScalarConverter::convert(const std::string& data)
 
 		if (*end == '\0')
 		{
-			convertDouble(value);
+			convertType(value);
 			return ;
 		}
 		else if (*end == 'f' && end == &data[0] + data.size() - 1)
 		{
-			convertFloat(value);
+			convertType(value);
 			return ;
 		}
 	}
+	std::cout.unsetf(std::ios::fixed);
+	std::cout << std::setprecision(6);
 
-	std::cout << "Cannot convert data because it isn't a recognized scalar type: "
-				<< data << std::endl;
+	printInvalid();
 }
