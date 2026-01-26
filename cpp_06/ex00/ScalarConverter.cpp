@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:41:36 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/24 15:08:36 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/01/26 18:26:18 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <limits>
 #include <cstdlib>
 #include <cerrno>
-#include <cmath>
 
 template <typename T>
 static void	printChar(T num)
 {
 	std::cout << "char: ";
 	if (num > std::numeric_limits<signed char>::max()
-	 || num < std::numeric_limits<signed char>::min())
+		|| num < std::numeric_limits<signed char>::min()
+		|| num != num)
 		std::cout << "impossible" << std::endl;
 	else if (num < ' ' || num >= 127)
 		std::cout << "Non displayable" << std::endl;
@@ -36,7 +36,8 @@ static void	printInt(T num)
 {
 	std::cout << "int: ";
 	if (num > std::numeric_limits<int>::max()
-	 || num < std::numeric_limits<int>::min())
+		|| num < std::numeric_limits<int>::min()
+		|| num != num)
 		std::cout << "impossible" << std::endl;
 	else
 		std::cout << static_cast<signed int>(num) << std::endl;
@@ -45,13 +46,13 @@ static void	printInt(T num)
 template <typename T>
 static void	printFloat(T num)
 {
-	std::cout << std::setprecision(1) << std::fixed << static_cast<float>(num) << 'f' <<  std::endl;
+	std::cout << "float: " << std::setprecision(1) << std::fixed << static_cast<float>(num) << 'f' <<  std::endl;
 }
 
 template <typename T>
 static void	printDouble(T num)
 {
-	std::cout << std::setprecision(1) << std::fixed << static_cast<double>(num) << std::endl;
+	std::cout << "double: "<< std::setprecision(1) << std::fixed << static_cast<double>(num) << std::endl;
 }
 
 static void printInvalid()
@@ -81,7 +82,7 @@ void ScalarConverter::convert(const std::string& data)
 	}
 
 	/* char */
-	if (data.size() == 1 && !std::isdigit(data[0]))
+	if (data.size() == 1 && !std::isdigit(static_cast<unsigned char>(data[0])))
 	{
 		convertType(data[0]);
 		return ;
@@ -95,13 +96,14 @@ void ScalarConverter::convert(const std::string& data)
 		errno = 0;
 		value = std::strtol(data.c_str(), &end, 10);
 
-		if (errno == ERANGE || value <) // logically inconsistent and unfinished
+		if (*end == '\0')
 		{
-			printInvalid();
-			return ;
-		}
-		else if (*end == '\0')
-		{
+			if (errno == ERANGE || value > std::numeric_limits<int>::max()
+				|| value < std::numeric_limits<int>::min())
+			{
+				printInvalid();
+				return ;
+			}
 			convertType(value);
 			return ;
 		}
@@ -115,16 +117,18 @@ void ScalarConverter::convert(const std::string& data)
 		if (*end == '\0')
 		{
 			convertType(value);
+			std::cout.unsetf(std::ios::fixed);
+			std::cout << std::setprecision(6);
 			return ;
 		}
 		else if (*end == 'f' && end == &data[0] + data.size() - 1)
 		{
-			convertType(value);
+			convertType(static_cast<float>(value));
+			std::cout.unsetf(std::ios::fixed);
+			std::cout << std::setprecision(6);
 			return ;
 		}
 	}
-	std::cout.unsetf(std::ios::fixed);
-	std::cout << std::setprecision(6);
 
 	printInvalid();
 }
