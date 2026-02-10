@@ -6,11 +6,12 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 18:35:17 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/18 17:28:12 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/10 18:15:03 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
+#include <iostream>
 
 template <typename T>
 Array<T>::Array()
@@ -19,7 +20,7 @@ Array<T>::Array()
 }
 
 template <typename T>
-Array<T>::Array(size_t n)
+Array<T>::Array(std::size_t n)
 	: array_(new T[n]()), size_(n)
 {
 }
@@ -28,7 +29,7 @@ template <typename T>
 Array<T>::Array(const Array<T>& other)
 	: array_(new T[other.size_]), size_(other.size_)
 {
-	for (size_t i = 0; i < size_; i++)
+	for (std::size_t i = 0; i < size_; i++)
 		array_[i] = other.array_[i];
 }
 
@@ -44,7 +45,7 @@ Array<T>&		Array<T>::operator=(const Array<T>& other)
 	if (this != &other)
 	{
 		T* new_array = new T[other.size_];
-		for (size_t i = 0; i < other.size_; i++)
+		for (std::size_t i = 0; i < other.size_; i++)
 			new_array[i] = other.array_[i];
 
 		delete[] array_;
@@ -55,7 +56,7 @@ Array<T>&		Array<T>::operator=(const Array<T>& other)
 }
 
 template <typename T>
-T&			Array<T>::operator[] (size_t i)
+T&			Array<T>::operator[] (std::size_t i)
 {
 	if (i >= size_)
 		throw Array<T>::OutOfBoundsAccess();
@@ -63,7 +64,7 @@ T&			Array<T>::operator[] (size_t i)
 }
 
 template <typename T>
-const T&	Array<T>::operator[] (size_t i) const
+const T&	Array<T>::operator[] (std::size_t i) const
 {
 	if (i >= size_)
 		throw Array<T>::OutOfBoundsAccess();
@@ -71,7 +72,7 @@ const T&	Array<T>::operator[] (size_t i) const
 }
 
 template <typename T>
-size_t		Array<T>::size() const
+std::size_t		Array<T>::size() const
 {
 	return size_;
 }
@@ -80,4 +81,12 @@ template <typename T>
 const char* Array<T>::OutOfBoundsAccess::what() const throw()
 {
 	return "Out of bounds array access";
+}
+
+template <typename T>
+std::ostream&	operator<<(std::ostream& out, const Array<T>& arr)
+{
+	for (std::size_t i = 0; i < arr.size(); i++)
+		std::cout << arr[i] << ' ';
+	return out;
 }

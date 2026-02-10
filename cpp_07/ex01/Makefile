@@ -2,7 +2,7 @@ NAME = test
 
 SRC = main.cpp
 
-HEADERS = iter.hpp util.hpp
+HEADERS = iter.hpp
 
 OBJ = $(SRC:.cpp=.o)
 

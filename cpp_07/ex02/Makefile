@@ -2,7 +2,7 @@ NAME = test
 
 SRC = main.cpp
 
-HEADERS = Array.hpp Array.tpp print_arr.hpp
+HEADERS = Array.hpp Array.tpp
 
 OBJ = $(SRC:.cpp=.o)
 

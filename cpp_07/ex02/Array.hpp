@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 18:32:26 by iherman-          #+#    #+#             */
-/*   Updated: 2026/01/17 19:28:00 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/10 18:13:48 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ template <typename T>
 class Array
 {
 	private:
-		T		*array_;
-		size_t	size_;
+		T			*array_;
+		std::size_t	size_;
 	public:
 		Array();
-		Array(size_t n);
+		Array(std::size_t n);
 		Array(const Array& other);
 		~Array();
 		Array&		operator=(const Array& other);
 
-		T&			operator[] (size_t i);
-		const T&	operator[] (size_t i) const;
+		T&			operator[] (std::size_t i);
+		const T&	operator[] (std::size_t i) const;
 
-		size_t		size() const;
+		std::size_t		size() const;
 
 		class OutOfBoundsAccess : public std::exception
 		{
@@ -41,6 +41,9 @@ class Array
 				virtual const char* what() const throw();
 		};
 };
+
+template <typename T>
+std::ostream&	operator<<(std::ostream& out, const Array<T>& arr);
 
 #include "Array.tpp"
 
