@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 19:05:16 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/11 15:15:24 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:56:02 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
+#include <limits>
+
+static int process_input()
+{
+    int user_input;
+
+    while (true)
+    {
+        if (std::cin >> user_input)
+        {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            return user_input;
+        }
+
+        std::cout << "Please provide a valid number" << std::endl;
+
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+}
 
 int	main()
 {
@@ -25,9 +45,13 @@ int	main()
 	v.push_back(4);
 	v.push_back(5);
 
-	std::vector<int>::iterator	found = easyfind(v, 3);
-	std::vector<int>::iterator 	not_found = easyfind(v, 10);
+	std::cout << "Provide a number to search for: " << std::endl;
+	int					num = process_input();
 
-	std::cout << "found: " << *found << std::endl;
-	std::cout << "not_found: " << *not_found << std::endl;
+	std::vector<int>::iterator	found = easyfind(v, num);
+
+	if (found != v.end())
+		std::cout << "found: " << *found << std::endl;
+	else
+		std::cout << "Could not find number: " << num << std::endl;
 }

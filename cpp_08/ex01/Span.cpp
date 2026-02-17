@@ -6,16 +6,18 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 15:45:07 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/12 16:08:04 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/17 15:25:04 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <algorithm>
 
+const std::size_t	Span::kDefaultMaxElements = 8;
+
 Span::Span()
 	: elements_(),
-		maxElements_(0)
+		maxElements_(kDefaultMaxElements)
 {
 }
 
@@ -54,7 +56,7 @@ void	Span::addNumber(int n)
 	elements_.push_back(n);
 }
 
-unsigned int	Span::shortestSpan()
+unsigned int	Span::shortestSpan() const
 {
 	if (elements_.size() <= 1)
 	{
@@ -68,12 +70,13 @@ unsigned int	Span::shortestSpan()
 	min_span = sorted[1] - sorted[0];
 	for (std::size_t i = 2; i < sorted.size(); ++i)
 	{
-		min_span = std::min(min_span, static_cast<unsigned int>(sorted[i] - sorted[i - 1]));
+		long diff = static_cast<long>(sorted[i]) - static_cast<long>(sorted[i - 1]);
+		min_span = std::min(min_span, static_cast<unsigned int>(diff));
 	}
 	return min_span;
 }
 
-unsigned int	Span::longestSpan()
+unsigned int	Span::longestSpan() const
 {
 	int	largest;
 	int	smallest;
@@ -90,17 +93,18 @@ unsigned int	Span::longestSpan()
 		largest = std::max(largest, elements_[i]);
 		smallest = std::min(smallest, elements_[i]);
 	}
-	return largest - smallest;
+	long diff = static_cast<long>(largest) - static_cast<long>(smallest);
+	return static_cast<unsigned int>(diff);
 }
 
-std::size_t	Span::size()
+std::size_t	Span::size() const
 {
 	return elements_.size();
 }
 
-std::size_t	Span::maxSize()
+std::size_t	Span::maxSize() const
 {
-	return elements_.size();
+	return maxElements_;
 }
 
 Span::iterator Span::begin()
@@ -113,12 +117,12 @@ Span::iterator Span::end()
 	return elements_.end();
 }
 
-Span::const_iterator Span::cbegin() const
+Span::const_iterator Span::begin() const
 {
 	return elements_.begin();
 }
 
-Span::const_iterator Span::cend() const
+Span::const_iterator Span::end() const
 {
 	return elements_.end();
 }
@@ -133,12 +137,12 @@ Span::reverse_iterator Span::rend()
 	return elements_.rend();
 }
 
-Span::const_reverse_iterator Span::crbegin() const
+Span::const_reverse_iterator Span::rbegin() const
 {
 	return elements_.rbegin();
 }
 
-Span::const_reverse_iterator Span::crend() const
+Span::const_reverse_iterator Span::rend() const
 {
 	return elements_.rend();
 }

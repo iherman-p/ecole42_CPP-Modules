@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:20:36 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/12 16:05:45 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/17 15:24:01 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 class Span
 {
 	private:
-		std::vector<int>	elements_;
-		std::size_t			maxElements_;
+		std::vector<int>			elements_;
+		std::size_t					maxElements_;
+		static const std::size_t	kDefaultMaxElements;
 	public:
 		Span();
 		Span(const Span& other);
@@ -31,11 +32,11 @@ class Span
 		Span&	operator=(const Span& other);
 
 		void			addNumber(int n);
-		unsigned int	shortestSpan();
-		unsigned int	longestSpan();
+		unsigned int	shortestSpan() const;
+		unsigned int	longestSpan() const;
 
-		std::size_t		size();
-		std::size_t		maxSize();
+		std::size_t		size() const;
+		std::size_t		maxSize() const;
 
 		typedef std::vector<int>::iterator					iterator;
 		typedef std::vector<int>::const_iterator			const_iterator;
@@ -45,14 +46,14 @@ class Span
 		iterator	begin();
 		iterator	end();
 
-		const_iterator	cbegin() const;
-		const_iterator	cend() const;
+		const_iterator	begin() const;
+		const_iterator	end() const;
 
 		reverse_iterator	rbegin();
 		reverse_iterator	rend();
 
-		const_reverse_iterator	crbegin() const;
-		const_reverse_iterator	crend() const;
+		const_reverse_iterator	rbegin() const;
+		const_reverse_iterator	rend() const;
 
 		class MaxElementsReached : public std::exception
 		{

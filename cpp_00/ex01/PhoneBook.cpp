@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 15:34:26 by iherman-          #+#    #+#             */
-/*   Updated: 2025/08/04 18:15:55 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:25:18 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	pb_get_user_index(int max)
 		}
 	}
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	return user_input - 1;
+	return user_input;
 }
 
 void	PhoneBook::add_contact()
