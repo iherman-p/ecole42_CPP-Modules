@@ -6,13 +6,15 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:46 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/19 17:29:29 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/19 21:42:54 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+#include <cstdlib>
 #include <iostream>
 #include <limits>
+#include <cerrno>
 
 const float		BitcoinExchange::kValueLimitUpper = 1000;
 const float		BitcoinExchange::kValueLimitLower = 0;
@@ -66,14 +68,16 @@ void	BitcoinExchange::addIndex(const std::string& date, float value)
 
 std::map<BitcoinExchange::Date, float>::const_iterator	BitcoinExchange::getClosestDate(Date date) const
 {
+	(void) date;
 	for (std::map<Date,float>::const_iterator it = c_.begin(); it != c_.end(); ++it)
 	{
 		std::cout << it->first << ':' << it->second << ' ';
 	}
 	std::cout << std::endl;
+	return c_.begin();
 }
 
-std::size_t	BitcoinExchange::size() const
+std::size_t	BitcoinExchange::size()  const
 {
 	return c_.size();
 }
@@ -94,14 +98,34 @@ const char* BitcoinExchange::InvalidSyntax::what() const throw()
 }
 
 BitcoinExchange::Date::Date()
-	: year_(2008), month_(8), day_(31) // FIX !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	: year_(2008), month_(8), day_(kMonthRange[7])
 {
+}
 
+static unsigned int parseString(const char* start, char** end, unsigned long limit_upper)
+{
+	unsigned long	value;
+
+	errno = 0;
+	value = std::strtoul(start, end, 10);
+	if (errno == ERANGE || value > limit_upper || value < 1 || **end == '-')
+		throw BitcoinExchange::Date::InvalidDate();
+
+	(*end)++;
+	return static_cast<unsigned int>(value);
 }
 
 BitcoinExchange::Date::Date(const std::string& date)
 {
-	
+	char*	end;
+
+	year_ = parseString(date.c_str(), &end, std::numeric_limits<unsigned int>::max());
+
+	char*	start = end;
+	month_ = parseString(start, &end, 12);
+
+	start = end;
+	month_ = parseString(start, &end, kMonthRange[month_ - 1]);
 }
 
 BitcoinExchange::Date::Date(const Date& other)
@@ -178,4 +202,5 @@ std::ostream&	operator<<(std::ostream& out, BitcoinExchange::Date date)
 	out << date.getYear() << '-'
 		<< date.getMonth() << '-'
 		<< date.getDay();
+	return out;
 }
