@@ -6,16 +6,13 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 18:32:26 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/17 15:55:46 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/18 16:04:46 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MUTANTSTACK_HPP
 # define MUTANTSTACK_HPP
 
-#include <exception>
-#include <cstddef>
-#include <ostream>
 #include <stack>
 
 template <typename T>

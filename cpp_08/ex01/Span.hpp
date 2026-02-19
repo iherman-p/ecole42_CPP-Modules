@@ -6,14 +6,13 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:20:36 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/17 15:24:01 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/18 16:02:37 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPAN_HPP
 # define SPAN_HPP
 
-# include <cstddef>
 # include <exception>
 # include <vector>
 

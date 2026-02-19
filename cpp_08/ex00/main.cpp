@@ -6,14 +6,13 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 19:05:16 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/17 14:56:02 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/18 16:09:55 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "easyfind.hpp"
 #include <iostream>
 #include <vector>
-#include <iterator>
 #include <limits>
 
 static int process_input()
