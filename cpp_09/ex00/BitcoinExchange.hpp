@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:44 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/19 17:05:17 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/22 22:57:34 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ class BitcoinExchange
 		class Date;
 
 	private:
-		const static float		kValueLimitUpper;
-		const static float		kValueLimitLower;
-
 		std::map<Date, float>	c_;
 
 	public:
@@ -36,20 +33,15 @@ class BitcoinExchange
 
 		void	addIndex(const std::string& date, float value);
 
-		std::map<Date, float>::const_iterator	getClosestDate(Date date) const; // tbd
+		std::map<Date, float>::const_iterator	getClosestDate(Date date) const;
 		std::size_t								size() const;
-	
-		class	ValueTooLarge : std::exception
+
+		class	ValueTooLarge : public std::exception
 		{
 			virtual const char* what() const throw();
 		};
 
-		class	ValueTooSmall : std::exception
-		{
-			virtual const char* what() const throw();
-		};
-
-		class	InvalidSyntax : std::exception
+		class	ValueTooSmall : public std::exception
 		{
 			virtual const char* what() const throw();
 		};
@@ -77,7 +69,7 @@ class BitcoinExchange
 				unsigned int	getMonth() const;
 				unsigned int	getDay() const;
 
-				class	InvalidDate : std::exception
+				class	InvalidDate : public std::exception
 				{
 					virtual const char* what() const throw();
 				};

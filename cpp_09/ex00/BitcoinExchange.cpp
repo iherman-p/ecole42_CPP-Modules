@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:46 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/19 21:42:54 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/22 22:54:57 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include <iostream>
 #include <limits>
 #include <cerrno>
-
-const float		BitcoinExchange::kValueLimitUpper = 1000;
-const float		BitcoinExchange::kValueLimitLower = 0;
 
 const int		BitcoinExchange::Date::kMonthRange[12] = {
 	31,
@@ -58,23 +55,23 @@ void	BitcoinExchange::addIndex(const std::string& date, float value)
 {
 	Date	tmp_date(date);
 
-	if (value < kValueLimitLower)
+	if (value < 0)
 		throw ValueTooSmall();
-	else if (value > kValueLimitUpper)
-		throw ValueTooLarge();
+	//else if (value > kValueLimitUpper)
+		//throw ValueTooLarge();
 
 	c_.insert(std::pair<Date,float>(tmp_date, value));
 }
 
 std::map<BitcoinExchange::Date, float>::const_iterator	BitcoinExchange::getClosestDate(Date date) const
 {
-	(void) date;
-	for (std::map<Date,float>::const_iterator it = c_.begin(); it != c_.end(); ++it)
-	{
-		std::cout << it->first << ':' << it->second << ' ';
-	}
-	std::cout << std::endl;
-	return c_.begin();
+	std::map<Date,float>::const_iterator it = c_.upper_bound(date);
+
+	if (it == c_.begin())
+		return it;
+
+	--it;
+	return it;
 }
 
 std::size_t	BitcoinExchange::size()  const
@@ -92,23 +89,18 @@ const char* BitcoinExchange::ValueTooSmall::what() const throw()
 	return "Value too small";
 }
 
-const char* BitcoinExchange::InvalidSyntax::what() const throw()
-{
-	return "Invalid syntax";
-}
-
 BitcoinExchange::Date::Date()
 	: year_(2008), month_(8), day_(kMonthRange[7])
 {
 }
 
-static unsigned int parseString(const char* start, char** end, unsigned long limit_upper)
+static unsigned int parseString(const char* start, char** end, unsigned long limit_upper, char accept = '-')
 {
 	unsigned long	value;
 
 	errno = 0;
 	value = std::strtoul(start, end, 10);
-	if (errno == ERANGE || value > limit_upper || value < 1 || **end == '-')
+	if (errno == ERANGE || value > limit_upper || value < 1 || **end != accept)
 		throw BitcoinExchange::Date::InvalidDate();
 
 	(*end)++;
@@ -125,7 +117,7 @@ BitcoinExchange::Date::Date(const std::string& date)
 	month_ = parseString(start, &end, 12);
 
 	start = end;
-	month_ = parseString(start, &end, kMonthRange[month_ - 1]);
+	day_ = parseString(start, &end, kMonthRange[month_ - 1], '\0');
 }
 
 BitcoinExchange::Date::Date(const Date& other)
