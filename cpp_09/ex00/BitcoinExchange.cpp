@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:46 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/22 22:54:57 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/23 20:32:28 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,24 +149,18 @@ bool	BitcoinExchange::Date::operator==(const Date& other) const
 
 bool	BitcoinExchange::Date::operator<(const Date& other) const
 {
-	if (year_ >= other.year_)
-		return false;
-	else if (month_ >= other.month_)
-		return false;
-	else if (day_ >= other.day_)
-		return false;
-	return true;
+    if (year_ != other.year_)
+        return year_ < other.year_;
+
+    if (month_ != other.month_)
+        return month_ < other.month_;
+
+    return day_ < other.day_;
 }
 
 bool	BitcoinExchange::Date::operator>(const Date& other) const
 {
-	if (year_ <= other.year_)
-		return false;
-	else if (month_ <= other.month_)
-		return false;
-	else if (day_ <= other.day_)
-		return false;
-	return true;
+	return other < *this;
 }
 
 unsigned int	BitcoinExchange::Date::getYear() const

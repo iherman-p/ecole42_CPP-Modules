@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:42 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/22 23:13:40 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/02/24 20:31:36 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,18 @@ BitcoinExchange	parse_log()
 void	convert_input(std::ifstream& input_file, BitcoinExchange& exchange_log)
 {
 	std::string	line;
+	const float	kAmountLimitUpper = 1000;
+
+	std::getline(input_file, line);
+	if (line != "date | value")
+	{
+		std::cerr << "Error: Missing header" << std::endl;
+	}
 	while (std::getline(input_file, line))
 	{
 		BitcoinExchange::Date	date;
 		float					amount;
-		size_t					pos = line.find(',');
+		size_t					pos = line.find(" | ");
 		char*					end;
 
 		if (pos != std::string::npos)
@@ -72,7 +79,11 @@ void	convert_input(std::ifstream& input_file, BitcoinExchange& exchange_log)
 			try
 			{
 				date = BitcoinExchange::Date(line.substr(0, pos));
-				amount = std::strtof(line.substr(pos + 1).c_str(), &end);
+				amount = std::strtof(line.substr(pos + 3).c_str(), &end);
+				if (amount < 0)
+					throw std::runtime_error("Value cannot be negative");
+				if (amount > kAmountLimitUpper)
+					throw std::runtime_error("Value cannot be higher than 1000");
 			}
 			catch (const std::exception& e)
 			{
@@ -81,7 +92,7 @@ void	convert_input(std::ifstream& input_file, BitcoinExchange& exchange_log)
 			}
 		}
 
-		if (pos == std::string::npos || *end)
+		if (pos == std::string::npos || *end || !line[pos + 3])
 		{
 			std::cerr << "Malformed line: " << line << std::endl;
 			continue ;
