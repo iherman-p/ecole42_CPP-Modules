@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:42 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/27 16:09:24 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/01 19:55:14 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include <cstdlib>
 #include <limits>
 #include <cerrno>
+
+std::ostream&	operator<<(std::ostream& out, std::vector<int> obj)
+{
+	for (std::size_t i = 0; i < sorted.size(); ++i)
+	{
+		std::cout << sorted[i] << ' ';
+	}
+}
 
 int	main(int argc, char* argv[])
 {
@@ -34,7 +42,7 @@ int	main(int argc, char* argv[])
 		value = std::strtol(argv[i], &end, 10);
 
 		if (*end != '\0' || errno == ERANGE || value > std::numeric_limits<int>::max()
-			|| value < std::numeric_limits<int>::min())
+			|| value < 0)
 		{
 			std::cerr << "Malformed input: " << argv[i] << std::endl;
 			return 1;			
@@ -43,13 +51,11 @@ int	main(int argc, char* argv[])
 		data.push_back(value);
 	}
 
+	std::cout << "Unsorted input: " << data << std::endl;
+
 	std::vector<int>	sorted = PmergeMe::mergeSort(data);
 
-	for (std::size_t i = 0; i < sorted.size(); ++i)
-	{
-		std::cout << sorted[i] << " ";
-	}
-	std::cout << std::endl;
+	std::cout << "Sorted input: " << data << std::endl;
 
 	return 0;
 }
