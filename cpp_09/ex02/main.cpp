@@ -6,21 +6,48 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:42 by iherman-          #+#    #+#             */
-/*   Updated: 2026/03/01 19:55:14 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/03 14:03:14 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <iostream>
 #include <cstdlib>
 #include <limits>
 #include <cerrno>
+#include <ctime>
+#include <vector>
+#include <deque>
+#include <sys/time.h>
 
 std::ostream&	operator<<(std::ostream& out, std::vector<int> obj)
 {
-	for (std::size_t i = 0; i < sorted.size(); ++i)
+	for (std::size_t i = 0; i < obj.size(); ++i)
 	{
-		std::cout << sorted[i] << ' ';
+		std::cout << obj[i] << ' ';
 	}
+	return out;
+}
+
+std::ostream&	operator<<(std::ostream& out, std::deque<int> obj)
+{
+	for (std::size_t i = 0; i < obj.size(); ++i)
+	{
+		std::cout << obj[i] << ' ';
+	}
+	return out;
+}
+
+long long	get_time_us()
+{
+	struct timeval	tv;
+	if (gettimeofday(&tv, NULL) != 0)
+	{
+		std::cerr << "Error: gettimeofday() failed" << std::endl;
+		return 0;
+	}
+
+	return static_cast<long long>(tv.tv_sec) * 1000000LL + tv.tv_usec;
 }
 
 int	main(int argc, char* argv[])
@@ -31,7 +58,8 @@ int	main(int argc, char* argv[])
 		return 1;
 	}
 
-	std::vector<int>	data;
+	std::vector<int>	data_vector;
+	std::deque<int>		data_deque;
 
 	for (int i = 1; i < argc; ++i)
 	{
@@ -48,14 +76,24 @@ int	main(int argc, char* argv[])
 			return 1;			
 		}
 
-		data.push_back(value);
+		data_vector.push_back(value);
+		data_deque.push_back(value);
 	}
 
-	std::cout << "Unsorted input: " << data << std::endl;
+	std::cout << "Unsorted input: " << data_vector << std::endl;
 
-	std::vector<int>	sorted = PmergeMe::mergeSort(data);
+	long long	begin_vec = get_time_us();
+	std::vector<int>	sorted_vector = PmergeMe::sortVector(data_vector);
+	long long	end_vec = get_time_us();
 
-	std::cout << "Sorted input: " << data << std::endl;
+	//long long	begin_deq = get_time_us(); 
+	//std::deque<int>	sorted_deque = PmergeMe::sortDeque(data_deque);
+	//long long	end_deq = get_time_us();
+
+	std::cout << "Sorted input: " << sorted_vector << std::endl;
+
+	std::cout << "Time elapsed using std::vector<int> " << end_vec - begin_vec << std::endl;
+	//std::cout << "Time elapsed using std::deque<int> " << end_deq - begin_deq << std::endl;
 
 	return 0;
 }
