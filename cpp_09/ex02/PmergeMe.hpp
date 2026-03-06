@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:57 by iherman-          #+#    #+#             */
-/*   Updated: 2026/03/05 19:56:48 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/06 22:04:59 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,41 @@
 
 #include <vector>
 #include <deque>
+#include <algorithm>
+#include <cstddef>
 
 class PmergeMe
 {
 	private:
-		template <typename T>
+		template <typename C>
 		class Pair
 		{
 			public:
 				Pair();
-				Pair(T a, T b);
+				Pair(int a, int b);
+				Pair(const Pair& a, const Pair& b);
 				~Pair();
 
 				Pair&	operator=(const Pair& other);
-				bool	operator<(const Pair& other);
-				bool	operator>(const Pair& other);
+				bool	operator<(const Pair& other) const;
+				bool	operator>(const Pair& other) const;
 
-				T	larger;
-				T	smaller;
+				Pair		getLarge() const;
+				Pair		getSmall() const;
+
+				C			pair;
+				std::size_t	pairSize;
 		};
 
 		PmergeMe();
 
-		static std::vector<unsigned int>	getJacobsthal(unsigned int max);
+		static std::vector<unsigned int>	getJacobsthal_(unsigned int max);
 
-		template <typename T>
-		static void	BinaryInsertVector(std::vector<T>& container, T value);
-		template <typename T>
-		static void	BinaryInsertDeque(std::deque<T>& container, T value);
+		template <typename C, typename T>
+		static void	BinaryInsert_(C& container, T value);
+
+		static void	sortVectorPair_(std::vector<Pair<std::vector<int> > >& data);
+		static void	sortDequePair_(std::deque<Pair<std::deque<int> > >& data);
 
 	public:
 		PmergeMe(const PmergeMe& other);
@@ -50,116 +57,102 @@ class PmergeMe
 
 		PmergeMe&	operator=(const PmergeMe& other);
 
-		template <typename T>
-		static std::vector<T>	sortVector(std::vector<T>& data);
-		template <typename T>
-		static std::deque<T>	sortDeque(std::deque<T>& data);
+		static void	sortVector(std::vector<int>& data);
+		static void	sortDeque(std::deque<int>& data);
 };
 
-template <typename T>
-PmergeMe::Pair<T>::Pair()
-	: larger(), smaller()
+template <typename C>
+PmergeMe::Pair<C>::Pair()
+	: pair(), pairSize(0)
 {}
 
-template <typename T>
-PmergeMe::Pair<T>::Pair(T a, T b)
+template <typename C>
+PmergeMe::Pair<C>::Pair(int a, int b)
+	: pair(), pairSize(1)
 {
 	if (a < b)
 	{
-		larger = b;
-		smaller = a;
+		pair.push_back(b);
+		pair.push_back(a);
 	}
 	else
 	{
-		larger = a;
-		smaller = b;
+		pair.push_back(a);
+		pair.push_back(b);
 	}
 }
 
-template <typename T>
-PmergeMe::Pair<T>::~Pair()
+template <typename C>
+PmergeMe::Pair<C>::Pair(const Pair& a, const Pair& b)
+	: pair(), pairSize(a.pairSize * 2)
+{
+	if (a < b)
+	{
+		this->pair.insert(pair.end(), b.pair.begin(), b.pair.end());
+		this->pair.insert(pair.end(), a.pair.begin(), a.pair.end());
+	}
+	else
+	{
+		this->pair.insert(pair.end(), a.pair.begin(), a.pair.end());
+		this->pair.insert(pair.end(), b.pair.begin(), b.pair.end());
+	}
+}
+
+template <typename C>
+PmergeMe::Pair<C>::~Pair()
 {}
 
-template <typename T>
-PmergeMe::Pair<T>&	PmergeMe::Pair<T>::operator=(const Pair<T>& other)
+template <typename C>
+PmergeMe::Pair<C>&	PmergeMe::Pair<C>::operator=(const Pair<C>& other)
 {
 	if (this != &other)
 	{
-		larger = other.larger;
-		smaller = other.larger;
+		pair = other.pair;
+		pairSize = other.pairSize;
 	}
 	return *this;
 }
 
-template <typename T>
-bool	PmergeMe::Pair<T>::operator<(const PmergeMe::Pair<T>& other)
+template <typename C>
+bool	PmergeMe::Pair<C>::operator<(const PmergeMe::Pair<C>& other) const
 {
-	return larger < other.larger;
+	return pair[0] < other.pair[0];
 }
 
-template <typename T>
-bool	PmergeMe::Pair<T>::operator>(const PmergeMe::Pair<T>& other)
+template <typename C>
+bool	PmergeMe::Pair<C>::operator>(const PmergeMe::Pair<C>& other) const
 {
-	return larger > other.larger;
+	return pair[0] > other.pair[0];
 }
 
-template <typename T>
-void	PmergeMe::BinaryInsertVector(std::vector<T>& container, T value)
+template <typename C>
+PmergeMe::Pair<C>	PmergeMe::Pair<C>::getLarge() const
 {
-	typename std::vector<T>::iterator pos =
+	Pair<C>	res = Pair<C>();
+
+	res.pair.insert(res.pair.end(), pair.begin(), pair.begin() + pairSize);
+	res.pairSize = pairSize / 2;
+
+	return res;
+}
+
+template <typename C>
+PmergeMe::Pair<C>	PmergeMe::Pair<C>::getSmall() const
+{
+	Pair<C>	res = Pair<C>();
+
+	res.pair.insert(res.pair.end(), pair.begin() + pairSize, pair.begin() + pairSize * 2);
+	res.pairSize = pairSize / 2;
+
+	return res;
+}
+
+template <typename C, typename T>
+void	PmergeMe::BinaryInsert_(C& container, T value)
+{
+	typename C::iterator pos =
 			std::lower_bound(container.begin(), container.end(), value);
 	container.insert(pos, value);
-}
-
-template <typename T>
-std::vector<T>	PmergeMe::sortVector(std::vector<T>& data)
-{
-	if (data.size() <= 1)
-		return data;
-
-	std::vector<Pair<T> >	pend;
-	std::vector<T>			main;
-
-	pend.reserve(data.size() / 2);
-	main.reserve(data.size());
-	for (std::size_t i = 0; i + 1 < data.size(); i += 2)
-		pend.push_back(Pair<T>(data[i + 1], data[i]));
-
-	bool	has_straggler = (data.size() % 2 != 0);
-	T		straggler = T();
-
-	if (has_straggler)
-		straggler = data.back();
-
-	pend = sortVector(pend);
-
-	for (std::size_t i = 0; i < pend.size(); ++i)
-		main.push_back(pend[i].larger);
-	
-	BinaryInsertVector(main, pend[0].smaller);
-
-	std::vector<unsigned int>	jacobs = getJacobsthal(pend.size());
-
-	for (std::size_t i = 2; i < jacobs.size(); ++i)
-	{
-		std::size_t	upper = jacobs[i];
-		std::size_t	lower = jacobs[i - 1];
-
-		if (upper > pend.size())
-			upper = pend.size();
-
-		for (; upper > lower; --upper)
-			BinaryInsertVector(main, pend[upper - 1].smaller);
-	}
-
-	for (std::size_t i = pend.size() - 1; i > jacobs[jacobs.size() - 2] - 1; --i)
-		BinaryInsertVector(main, pend[i].smaller);
-
-	if (has_straggler)
-		BinaryInsertVector(main, straggler);
-
-	data = main;
-	return data;
 }
 
 #endif // PMERGEME_HPP

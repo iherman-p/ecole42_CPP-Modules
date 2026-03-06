@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:46 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/23 20:32:28 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/05 14:58:52 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	BitcoinExchange::addIndex(const std::string& date, float value)
 
 	if (value < 0)
 		throw ValueTooSmall();
-	//else if (value > kValueLimitUpper)
-		//throw ValueTooLarge();
 
 	c_.insert(std::pair<Date,float>(tmp_date, value));
 }
