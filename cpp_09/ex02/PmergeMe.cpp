@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 15:02:03 by iherman-          #+#    #+#             */
-/*   Updated: 2026/03/06 22:18:22 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/07 16:36:20 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ void	PmergeMe::sortVectorPair_(std::vector<Pair<std::vector<int> > >& data)
 			BinaryInsert_(main, pend[upper - 1]);
 	}
 
-	for (std::size_t i = pend.size() - 1; i > jacobs[jacobs.size() - 2] - 1; --i)
+	for (std::size_t i = pend.size() - 1; i > jacobs[jacobs.size() - 2]; --i)
 		BinaryInsert_(main, pend[i]);
 
 	if (has_straggler)
 		BinaryInsert_(main, straggler);
 
-	data = main;
+	data.swap(main);
 }
 
 void	PmergeMe::sortVector(std::vector<int>& data)
@@ -152,13 +152,13 @@ void	PmergeMe::sortVector(std::vector<int>& data)
 			BinaryInsert_(main, pend[upper - 1]);
 	}
 
-	for (std::size_t i = pend.size() - 1; i > jacobs[jacobs.size() - 2] - 1; --i)
+	for (std::size_t i = pend.size() - 1; i > jacobs[jacobs.size() - 2]; --i)
 		BinaryInsert_(main, pend[i]);
 
 	if (has_straggler)
 		BinaryInsert_(main, straggler);
 
-	data = main;
+	data.swap(main);
 }
 
 void	PmergeMe::sortDequePair_(std::deque<Pair<std::deque<int> > >& data)
@@ -206,13 +206,13 @@ void	PmergeMe::sortDequePair_(std::deque<Pair<std::deque<int> > >& data)
 			BinaryInsert_(main, pend[upper - 1]);
 	}
 
-	for (std::size_t i = pend.size() - 1; i > jacobs[jacobs.size() - 2] - 1; --i)
+	for (std::size_t i = pend.size() - 1; i > jacobs[jacobs.size() - 2]; --i)
 		BinaryInsert_(main, pend[i]);
 
 	if (has_straggler)
 		BinaryInsert_(main, straggler);
 
-	data = main;
+	data.swap(main);
 }
 
 void	PmergeMe::sortDeque(std::deque<int>& data)
@@ -260,11 +260,11 @@ void	PmergeMe::sortDeque(std::deque<int>& data)
 			BinaryInsert_(main, pend[upper - 1]);
 	}
 
-	for (std::size_t i = pend.size() - 1; i > jacobs[jacobs.size() - 2] - 1; --i)
+	for (std::size_t i = pend.size() - 1; i > jacobs[jacobs.size() - 2]; --i)
 		BinaryInsert_(main, pend[i]);
 
 	if (has_straggler)
 		BinaryInsert_(main, straggler);
 
-	data = main;
+	data.swap(main);
 }

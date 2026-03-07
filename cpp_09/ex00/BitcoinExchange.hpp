@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:44 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/22 22:57:34 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/07 15:03:26 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ class BitcoinExchange
 		void	addIndex(const std::string& date, float value);
 
 		std::map<Date, float>::const_iterator	getClosestDate(Date date) const;
+		std::map<Date, float>::const_iterator	end() const;
+
 		std::size_t								size() const;
 
 		class	ValueTooLarge : public std::exception

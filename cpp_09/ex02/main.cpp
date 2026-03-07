@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:42 by iherman-          #+#    #+#             */
-/*   Updated: 2026/03/06 22:06:02 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/07 16:27:07 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int argc, char* argv[])
 		data_deque.push_back(value);
 	}
 
-	std::cout << "Unsorted input: " << data_vector << std::endl;
+	std::cout << "Before: " << data_vector << std::endl;
 
 	long long	begin_vec = get_time_us();
 	PmergeMe::sortVector(data_vector);
@@ -90,10 +90,10 @@ int	main(int argc, char* argv[])
 	PmergeMe::sortDeque(data_deque);
 	long long	end_deq = get_time_us();
 
-	std::cout << "Sorted input: " << data_vector << std::endl;
+	std::cout << "After: " << data_vector << std::endl;
 
-	std::cout << "Time elapsed using std::vector<int> " << end_vec - begin_vec << std::endl;
-	std::cout << "Time elapsed using std::deque<int> " << end_deq - begin_deq << std::endl;
+	std::cout << "Time to process a range of " << data_vector.size() << " elements using std::vector<int> : " << end_vec - begin_vec << " us" << std::endl;
+	std::cout << "Time to process a range of " << data_deque.size() << " elements using std::deque<int> : " << end_deq - begin_deq << " us" << std::endl;
 
 	return 0;
 }

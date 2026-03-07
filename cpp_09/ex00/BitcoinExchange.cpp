@@ -6,11 +6,12 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:46 by iherman-          #+#    #+#             */
-/*   Updated: 2026/03/05 14:58:52 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/07 15:43:52 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+#include <iomanip>
 #include <cstdlib>
 #include <iostream>
 #include <limits>
@@ -66,10 +67,15 @@ std::map<BitcoinExchange::Date, float>::const_iterator	BitcoinExchange::getClose
 	std::map<Date,float>::const_iterator it = c_.upper_bound(date);
 
 	if (it == c_.begin())
-		return it;
+		return c_.end();
 
 	--it;
 	return it;
+}
+
+std::map<BitcoinExchange::Date, float>::const_iterator	BitcoinExchange::end() const
+{
+	return c_.end();
 }
 
 std::size_t	BitcoinExchange::size()  const
@@ -184,7 +190,7 @@ const char* BitcoinExchange::Date::InvalidDate::what() const throw()
 std::ostream&	operator<<(std::ostream& out, BitcoinExchange::Date date)
 {
 	out << date.getYear() << '-'
-		<< date.getMonth() << '-'
-		<< date.getDay();
+		<< std::setw(2) << std::setfill('0') << date.getMonth() << '-'
+		<< std::setw(2) << std::setfill('0') << date.getDay();
 	return out;
 }

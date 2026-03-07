@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:53 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/25 21:04:32 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/07 15:18:20 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ class RPN
 			virtual const char* what() const throw();
 		};
 		class InsufficientElements : public std::exception
+		{
+			virtual const char* what() const throw();
+		};
+		class ElementOperatorMismatch : public std::exception
+		{
+			virtual const char* what() const throw();
+		};
+		class DivisionByZero : public std::exception
 		{
 			virtual const char* what() const throw();
 		};

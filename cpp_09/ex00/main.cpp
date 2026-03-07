@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:42 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/24 20:31:36 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/07 15:45:38 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ BitcoinExchange	parse_log()
 
 		if (pos == std::string::npos || *end)
 		{
-			// std::cerr << "Malformed line: " << line << std::endl;
 			continue ;
 		}
 
@@ -51,7 +50,6 @@ BitcoinExchange	parse_log()
 		}
 		catch (const std::exception& e)
 		{
-			// std::cerr << "Error: " << e.what() << std::endl;
 		}
 	}
 	return exchange_log;
@@ -66,12 +64,13 @@ void	convert_input(std::ifstream& input_file, BitcoinExchange& exchange_log)
 	if (line != "date | value")
 	{
 		std::cerr << "Error: Missing header" << std::endl;
+		return ;
 	}
 	while (std::getline(input_file, line))
 	{
+		size_t					pos = line.find(" | ");
 		BitcoinExchange::Date	date;
 		float					amount;
-		size_t					pos = line.find(" | ");
 		char*					end;
 
 		if (pos != std::string::npos)
@@ -101,13 +100,20 @@ void	convert_input(std::ifstream& input_file, BitcoinExchange& exchange_log)
 		std::map<BitcoinExchange::Date,float>::const_iterator it;
 		it = exchange_log.getClosestDate(date);
 
-		std::cout << it->first << " => " << amount << " = " << amount * it->second << std::endl;
+		if (it == exchange_log.end())
+			std::cerr << "Could not find date in database: " << date << std::endl;
+		else
+			std::cout << it->first << " => " << amount << " = " << amount * it->second << std::endl;
 	}
 }
 
 int main(int argc, char* argv[])
 {
-	(void) argc;
+	if (argc != 2)
+	{
+		std::cerr << "Error: Expected singular input file" << std::endl;
+		return 1;
+	}
 
 	std::ifstream	input_file(argv[1]);
 

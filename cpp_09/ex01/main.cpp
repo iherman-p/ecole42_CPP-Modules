@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:42 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/24 22:07:39 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/07 15:27:12 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char* argv[])
 {
 	if (argc != 2)
 	{
-		std::cerr << "Error: missing input" << std::endl;
+		std::cerr << "Error: Expected one argument" << std::endl;
 		return 1;
 	}
 

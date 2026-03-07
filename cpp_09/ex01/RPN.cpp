@@ -6,7 +6,7 @@
 /*   By: iherman- <iherman-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:20:51 by iherman-          #+#    #+#             */
-/*   Updated: 2026/02/24 22:26:47 by iherman-         ###   ########.fr       */
+/*   Updated: 2026/03/07 15:22:28 by iherman-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	RPN::isOperator(const char c) const
 	return false;
 }
 
-void	RPN::applyOperator(const RPN::Operator o)
+void	RPN::applyOperator(const RPN::Operator op)
 {
 	if (c_.size() < 2)
 		throw InsufficientElements();
@@ -35,14 +35,18 @@ void	RPN::applyOperator(const RPN::Operator o)
 	c_.pop();
 
 	int	res;
-	if (o == PLUS)
+	if (op == PLUS)
 		res = n2 + n1;
-	else if (o == MINUS)
+	else if (op == MINUS)
 		res = n2 - n1;
-	else if (o == MULT)
+	else if (op == MULT)
 		res = n2 * n1;
-	else if (o == DIV)
+	else if (op == DIV)
+	{
+		if (n1 == 0)
+			throw DivisionByZero();
 		res = n2 / n1;
+	}
 
 	c_.push(res);
 }
@@ -69,8 +73,7 @@ RPN& RPN::operator=(const RPN& other)
 
 int	RPN::evaluate(const std::string& expression)
 {
-	while (!c_.empty())
-	    c_.pop();
+	c_ = std::stack<int>();
 	
 	for (std::size_t i = 0; i < expression.size(); ++i)
 	{
@@ -86,7 +89,7 @@ int	RPN::evaluate(const std::string& expression)
 	}
 
 	if (c_.size() != 1)
-		throw InsufficientElements();
+		throw ElementOperatorMismatch();
 
 	return c_.top();
 }
@@ -99,4 +102,14 @@ const char* RPN::InvalidCharacter::what() const throw()
 const char* RPN::InsufficientElements::what() const throw()
 {
 	return "Not enough elements to apply operator";
+}
+
+const char* RPN::ElementOperatorMismatch::what() const throw()
+{
+	return "Operator/operand mismatch";
+}
+
+const char* RPN::DivisionByZero::what() const throw()
+{
+	return "Division by zero not allowed";
 }
